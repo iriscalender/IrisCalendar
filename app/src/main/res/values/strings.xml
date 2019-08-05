@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">IrisCalendar</string>
+
+    <!--account-->
+    <string name="id">아이디</string>
+    <string name="password">비밀번호</string>
+    <string name="login">로그인</string>
+    <string name="not_member">아직 회원이 아니신가요?</string>
+    <string name="sign_up">회원가입</string>
+    <string name="password_confirm">비밀번호 재확인</string>
+
+    <string name="set_time">할당시간 설정하기</string>
+    <string name="set_time_info">여러분의 24시간 중\n
+        일정을 위해 사용할 수 있는 시간은 언제부터 언제입니까?\n
+        한시간 기준으로 시간을 설정할 수 있습니다.\n
+        원하는 시간대를 체크해 주세요.\n
+        세모 버튼을 클릭한 후\n
+        시계를 시계방향으로 돌리면 시간이 선택되고\n
+        다시 세모 버튼을 누르면 고정됩니다.</string>
+    <string name="complete">완료</string>
+    <string name="calendar">CALENDAR</string>
+    <string name="today">Today</string>
+    <string name="no_plan">일정이 없습니다.</string>
+    <string name="setting">설정</string>
+    <string name="re_time_set">할당 시간 재설정하기</string>
+    <string name="modify_category">카테고리 수정하기</string>
+    <string name="logout">로그아웃</string>
+    <string name="add_schedule">일정 추가하기</string>
+
+</resources>
