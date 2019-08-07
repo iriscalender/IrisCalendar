@@ -26,5 +26,9 @@
     <string name="modify_category">카테고리 수정하기</string>
     <string name="logout">로그아웃</string>
     <string name="add_schedule">일정 추가하기</string>
+    <string name="cancel">취소</string>
+    <string name="category">카테고리</string>
+    <string name="todo">해아할 일정</string>
+    <string name="end_date">일정을 끝마칠 날</string>
 
 </resources>

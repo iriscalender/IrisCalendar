@@ -6,10 +6,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.Animator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,26 +29,17 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.layoutMenu)
     ConstraintLayout layoutMenu;
 
-    @BindView(R.id.iv_menu)
-    AppCompatImageView ivMenu;
-
-    @BindView(R.id.iv_menu_close)
-    AppCompatImageView ivMenuClose;
-
-    @BindView(R.id.view_menu_close)
-    View viewMenuClose;
-
     @BindView(R.id.layoutAdd)
     ConstraintLayout layoutAdd;
 
-    @BindView(R.id.view_add_close)
-    View viewAddClose;
+    @BindView(R.id.tv_re_time_set)
+    TextView tvReTimeSet;
 
-    @BindView(R.id.iv_add_close)
-    AppCompatImageView ivAddClose;
+    @BindView(R.id.tv_modify_category)
+    TextView tvModifyCategory;
 
-    @BindView(R.id.iv_add)
-    AppCompatImageView ivAdd;
+    @BindView(R.id.tv_add_schedule)
+    TextView tvAddSchedule;
 
     private boolean isOpen = false;
 
@@ -57,17 +49,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        ivMenu.setOnClickListener(v -> viewMenu());
+        tvReTimeSet.setOnClickListener(v -> startActivity(new Intent(this, ReTimeSetActivity.class)));
 
-        ivMenuClose.setOnClickListener(v -> viewMenu());
+        tvModifyCategory.setOnClickListener(v -> startActivity(new Intent(this, ModifyCategoryActivity.class)));
 
-        viewMenuClose.setOnClickListener(v -> viewMenu());
-
-        ivAdd.setOnClickListener(v -> viewAdd());
-
-        viewAddClose.setOnClickListener(v -> viewAdd());
-
-        ivAddClose.setOnClickListener(v -> viewAdd());
+        tvAddSchedule.setOnClickListener(v -> startActivity(new Intent(this, AddScheduleActivity.class)));
 
         List<Schedule> listItems = new ArrayList<>();
         listItems.add(new Schedule("title", "time"));
@@ -80,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         rvSchedule.setAdapter(new ScheduleListAdapter(listItems));
     }
 
-    private void viewMenu() {
+    public void viewMenu(View view) {
 
         if (!isOpen) {
             int x = layoutMain.getLeft();
@@ -131,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void viewAdd() {
+    public void viewAdd(View view) {
         if (!isOpen) {
             int x = layoutMain.getRight();
             int y = layoutMain.getTop();

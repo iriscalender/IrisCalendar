@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ModifyCategoryActivity">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorPrimaryLight" />
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:textColor="@color/colorWhite"
+        android:textSize="22sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/modify_category"
+        android:textColor="@color/colorWhite"
+        android:textSize="22sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/tv_complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/complete"
+        android:textColor="@color/colorWhite"
+        android:textSize="22sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"/>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_complete"
+        android:background="@drawable/bg_round_white"/>
+
+    <View
+        android:id="@+id/view_first"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:background="@drawable/bg_circle_purple"
+        app:layout_constraintLeft_toLeftOf="@id/view"
+        app:layout_constraintTop_toTopOf="@id/view"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="100dp"/>
+
+    <TextView
+        android:id="@+id/tv_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/view_first"
+        app:layout_constraintTop_toTopOf="@id/view_first"
+        app:layout_constraintBottom_toBottomOf="@id/view_first"
+        android:layout_marginStart="20dp"/>
+
+    <View
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:id="@+id/view_second"
+        android:background="@drawable/bg_circle_sky"
+        app:layout_constraintLeft_toLeftOf="@id/view_first"
+        app:layout_constraintTop_toBottomOf="@id/view_first"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/tv_first"
+        app:layout_constraintTop_toTopOf="@id/view_second"
+        app:layout_constraintBottom_toBottomOf="@id/view_second" />
+
+    <View
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:id="@+id/view_third"
+        android:background="@drawable/bg_circle_red"
+        app:layout_constraintLeft_toLeftOf="@id/view_second"
+        app:layout_constraintTop_toBottomOf="@id/view_second"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/tv_first"
+        app:layout_constraintTop_toTopOf="@id/view_third"
+        app:layout_constraintBottom_toBottomOf="@id/view_third" />
+
+    <View
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:id="@+id/view_fourth"
+        android:background="@drawable/bg_circle_orange"
+        app:layout_constraintLeft_toLeftOf="@id/view_third"
+        app:layout_constraintTop_toBottomOf="@id/view_third"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/tv_first"
+        app:layout_constraintTop_toTopOf="@id/view_fourth"
+        app:layout_constraintBottom_toBottomOf="@id/view_fourth" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

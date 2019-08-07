@@ -20,7 +20,8 @@
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_menu_sky"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="viewMenu"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,7 +40,8 @@
             android:layout_marginEnd="10dp"
             android:src="@drawable/ic_plus_orange"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_menu" />
+            app:layout_constraintTop_toTopOf="@id/iv_menu"
+            android:onClick="viewAdd"/>
 
 
         <androidx.core.widget.NestedScrollView
@@ -80,7 +82,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="July 5"
                     android:textColor="#747474"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_today"
@@ -94,7 +95,8 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_today" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_today"
+                    android:layoutAnimation="@anim/layout_animation_slide_from_right"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
@@ -118,7 +120,8 @@
             app:layout_constraintRight_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="0dp" />
+            tools:layout_editor_absoluteY="0dp"
+            android:onClick="viewMenu"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_menu_close"
@@ -128,7 +131,8 @@
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_menu_white"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="viewMenu"/>
 
         <TextView
             android:id="@+id/tv_re_time_set"
@@ -175,7 +179,8 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="parent"
+            android:onClick="viewAdd"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_add_close"
@@ -185,9 +190,11 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp"
+            android:onClick="viewAdd"/>
 
         <TextView
+            android:id="@+id/tv_add_schedule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_schedule"
