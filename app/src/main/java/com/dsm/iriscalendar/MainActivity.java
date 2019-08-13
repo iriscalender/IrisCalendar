@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
             layoutMenu.setVisibility(View.VISIBLE);
             anim.start();
+            layoutMain.setVisibility(View.INVISIBLE);
 
             isOpen = true;
 
@@ -112,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             anim.start();
+            layoutMain.setVisibility(View.VISIBLE);
 
             isOpen = false;
         }
@@ -129,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
             layoutAdd.setVisibility(View.VISIBLE);
             anim.start();
+            layoutMain.setVisibility(View.INVISIBLE);
 
             isOpen = true;
         } else {
@@ -161,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             anim.start();
+            layoutMain.setVisibility(View.VISIBLE);
 
             isOpen = false;
         }
