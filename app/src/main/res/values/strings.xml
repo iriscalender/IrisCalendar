@@ -30,5 +30,6 @@
     <string name="category">카테고리</string>
     <string name="todo">해아할 일정</string>
     <string name="end_date">일정을 끝마칠 날</string>
+    <string name="back_to_exit">뒤로 버튼을 한번 더 누르시면 종료됩니다.</string>
 
 </resources>

@@ -11,12 +11,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.subjects.Subject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +47,22 @@ public class MainActivity extends AppCompatActivity {
     TextView tvAddSchedule;
 
     private boolean isOpen = false;
+
+    private Subject<Long> backSubject = BehaviorSubject.createDefault(0L).toSerialized();
+
+    private Disposable backSubjectDisposable = backSubject.buffer(2, 1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(it -> {
+                if (it.get(1) - it.get(0) <= 1500)
+                    finish();
+                else
+                    Toast.makeText(this, getString(R.string.back_to_exit), Toast.LENGTH_SHORT).show();
+            });
+
+    @Override
+    public void onBackPressed() {
+        backSubject.onNext(System.currentTimeMillis());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,5 +189,11 @@ public class MainActivity extends AppCompatActivity {
 
             isOpen = false;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        backSubjectDisposable.dispose();
+        super.onDestroy();
     }
 }
