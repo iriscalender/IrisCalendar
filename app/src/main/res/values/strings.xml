@@ -36,5 +36,9 @@
     <string name="date">일</string>
     <string name="required_time">소요 시간</string>
     <string name="time">시간</string>
+    <string name="set_start_time">Set Start Time</string>
+    <string name="set_end_time">Set End Time</string>
+    <string name="am">AM</string>
+    <string name="colon">:</string>
 
 </resources>
