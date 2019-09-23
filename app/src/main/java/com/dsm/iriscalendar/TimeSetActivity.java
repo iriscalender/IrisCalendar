@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -15,9 +17,6 @@ import butterknife.ButterKnife;
 import github.hellocsl.cursorwheel.CursorWheelLayout;
 
 public class TimeSetActivity extends AppCompatActivity {
-
-    @BindView(R.id.tv_complete)
-    TextView tvComplete;
 
     @BindView(R.id.tv_start_meridiem)
     TextView tvStartMeridiem;
@@ -52,6 +51,9 @@ public class TimeSetActivity extends AppCompatActivity {
     @BindView(R.id.tv_set_end)
     TextView tvSetEnd;
 
+    @BindView(R.id.btn_set_time)
+    Button btnSetTime;
+
     private boolean isStart = true;
 
     @Override
@@ -60,11 +62,9 @@ public class TimeSetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_time_set);
         ButterKnife.bind(this);
 
-        tvComplete.setOnClickListener(v -> startActivity(new Intent(this, MainActivity.class)));
-
         npMeridiem.setMinValue(0);
         npMeridiem.setMaxValue(1);
-        npMeridiem.setDisplayedValues(new String[] { "AM", "PM" });
+        npMeridiem.setDisplayedValues(new String[]{"AM", "PM"});
         npMeridiem.setWrapSelectorWheel(false);
 
         npHour.setMinValue(1);
@@ -72,7 +72,7 @@ public class TimeSetActivity extends AppCompatActivity {
 
         npMinute.setMinValue(0);
         npMinute.setMaxValue(1);
-        npMinute.setDisplayedValues(new String[] { "00", "30" });
+        npMinute.setDisplayedValues(new String[]{"00", "30"});
 
         tvSetStart.setOnClickListener(v -> {
             isStart = true;
@@ -154,6 +154,11 @@ public class TimeSetActivity extends AppCompatActivity {
                     tvEndMinute.setText(getString(R.string._30));
                 }
             }
+        });
+
+        btnSetTime.setOnClickListener(v -> {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
         });
     }
 }
