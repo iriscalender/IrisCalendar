@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.dsm.iriscalendar">
 
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".IrisCalendarApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,23 +14,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:fullBackupContent="true"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
             android:value="true" />
-        <activity android:name=".AddScheduleActivity" />
-        <activity android:name=".ModifyCategoryActivity" />
-        <activity android:name=".ReTimeSetActivity" />
-        <activity android:name=".TimeSetActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".ui.activity.AddScheduleActivity" />
+        <activity android:name=".ui.activity.ModifyCategoryActivity" />
+        <activity android:name=".ui.activity.ReTimeSetActivity" />
+        <activity android:name=".ui.activity.TimeSetActivity" />
+        <activity android:name=".ui.activity.SignUpActivity" />
+        <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".ui.activity.MainActivity" />
     </application>
 
 </manifest>

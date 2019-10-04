@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.activity.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:visibility="visible"
+        android:background="@color/colorWhite">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_menu"
@@ -58,45 +59,74 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <CalendarView
-                    android:id="@+id/calendar"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:id="@+id/ll_select"
+                    android:gravity="center">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_calendar_left" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginEnd="50dp"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_calendar_right"/>
+
+                </LinearLayout>
+
+                <com.haibin.calendarview.CalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    app:calendar_padding="10dp"
+                    app:month_view="com.dsm.iriscalendar.ui.custom.ColorfulMonthView"
+                    app:month_view_show_mode="mode_only_current"
+                    app:selected_text_color="#fff"
+                    app:selected_theme_color="#108cd4"
+                    app:week_text_size="18sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_select" />
 
                 <TextView
                     android:id="@+id/tv_today"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="14dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
                     android:text="@string/today"
                     android:textColor="@color/colorBlack"
                     android:textSize="18sp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/calendar" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:textColor="#747474"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_today"
-                    app:layout_constraintLeft_toRightOf="@id/tv_today" />
+                    app:layout_constraintTop_toBottomOf="@id/calendarView"
+                    android:background="#fafafa" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_schedule"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_today"
-                    android:layoutAnimation="@anim/layout_animation_slide_from_right"/>
+                    android:layoutAnimation="@anim/layout_animation_slide_from_right"
+                    android:background="#fafafa"
+                    android:overScrollMode="never"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
