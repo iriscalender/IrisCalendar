@@ -24,7 +24,7 @@
         <activity android:name=".ui.activity.ModifyCategoryActivity" />
         <activity android:name=".ui.activity.ReTimeSetActivity" />
         <activity android:name=".ui.activity.TimeSetActivity" />
-        <activity android:name=".ui.activity.SignUpActivity" />
+        <activity android:name=".ui.signUp.SignUpActivity" />
         <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

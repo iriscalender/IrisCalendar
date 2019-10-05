@@ -1,6 +1,6 @@
 package com.dsm.iriscalendar.data.model;
 
-public class LoginResponse {
+public class AuthResponse {
 
     private String uuid;
     private String token;

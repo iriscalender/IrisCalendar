@@ -1,4 +1,4 @@
-package com.dsm.iriscalendar.ui.login;
+package com.dsm.iriscalendar.ui.signUp;
 
 import com.dsm.iriscalendar.data.Api;
 import com.dsm.iriscalendar.data.local.PrefHelper;
@@ -12,30 +12,31 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
-public class LoginRepository implements LoginContract.Repository {
+public class SignUpRepository implements SignUpContract.Repository {
 
     private Api api;
     private PrefHelper prefHelper;
 
-    public LoginRepository(Api api, PrefHelper prefHelper) {
+    public SignUpRepository(Api api, PrefHelper prefHelper) {
         this.api = api;
         this.prefHelper = prefHelper;
     }
 
     @Override
-    public Flowable<Response<AuthResponse>> login(String id, String password) {
+    public Flowable<Response<AuthResponse>> signUp(String id, String password, String reType) {
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
-        params.put("password", password);
-        return api.login(params)
+        params.put("password1", password);
+        params.put("password2", reType);
+        return api.signUp(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(it -> {
-                    if (it.code() == 200) {
-                        if (it.body() != null) {
-                            AuthResponse response = it.body();
-                            prefHelper.saveToken(response.getToken());
-                            prefHelper.saveUuid(response.getUuid());
+                .doOnNext(response -> {
+                    if (response.code() == 200) {
+                        if (response.body() != null) {
+                            AuthResponse body = response.body();
+                            prefHelper.saveUuid(body.getUuid());
+                            prefHelper.saveToken(body.getToken());
                         }
                     }
                 });

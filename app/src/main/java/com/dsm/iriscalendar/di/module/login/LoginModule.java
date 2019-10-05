@@ -1,4 +1,4 @@
-package com.dsm.iriscalendar.di.module;
+package com.dsm.iriscalendar.di.module.login;
 
 import com.dsm.iriscalendar.data.Api;
 import com.dsm.iriscalendar.data.local.PrefHelper;

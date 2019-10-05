@@ -1,21 +1,22 @@
-package com.dsm.iriscalendar.ui.login;
+package com.dsm.iriscalendar.ui.signUp;
 
 import com.dsm.iriscalendar.base.BasePresenter;
 
-public class LoginPresenter extends BasePresenter<LoginContract.View> implements LoginContract.Presenter {
+public class SignUpPresenter extends BasePresenter<SignUpContract.View> implements SignUpContract.Presenter {
 
-    private LoginContract.Repository repository;
+    private SignUpContract.Repository repository;
 
-    public LoginPresenter(LoginContract.Repository repository) {
+    public SignUpPresenter(SignUpContract.Repository repository) {
         this.repository = repository;
     }
 
     @Override
-    public void login() {
-        String id = view.getId();
-        String password = view.getPassword();
+    public void signUp() {
+        String id = view.getInputId();
+        String password = view.getInputPassword();
+        String reType = view.getInputReType();
 
-        if (id.isEmpty() || password.isEmpty()) {
+        if (id.isEmpty() || password.isEmpty() || reType.isEmpty()) {
             view.toastBlankError();
             return;
         }
@@ -30,20 +31,28 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
             return;
         }
 
+        if (!password.equals(reType)) {
+            view.toastNotSamePassword();
+            return;
+        }
+
         addDisposable(
-                repository.login(id, password).subscribe(it -> {
+                repository.signUp(id, password, reType).subscribe(it -> {
                     switch (it.code()) {
                         case 200:
-                            view.finishActivity();
                             view.startMainActivity();
                             break;
                         case 400:
                             view.toastInvalidValue();
+                            break;
+                        case 409:
+                            view.toastUserAlreadyExists();
                             break;
                         default:
                             view.toastServerError();
                     }
                 }, throwable -> view.toastServerError())
         );
+
     }
 }

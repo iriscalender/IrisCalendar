@@ -1,30 +1,21 @@
-package com.dsm.iriscalendar.ui.login;
+package com.dsm.iriscalendar.ui.signUp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dsm.iriscalendar.R;
 import com.dsm.iriscalendar.base.BaseActivity;
 import com.dsm.iriscalendar.ui.activity.MainActivity;
-import com.dsm.iriscalendar.ui.signUp.SignUpActivity;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class LoginActivity extends BaseActivity implements LoginContract.View {
-
-    @BindView(R.id.tv_sign_up)
-    TextView tvSignUP;
-
-    @BindView(R.id.btn_login)
-    Button btnLogin;
+public class SignUpActivity extends BaseActivity implements SignUpContract.View {
 
     @BindView(R.id.et_id)
     EditText etId;
@@ -32,37 +23,38 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @BindView(R.id.et_password)
     EditText etPassword;
 
+    @BindView(R.id.et_password_confirm)
+    EditText etReType;
+
+    @BindView(R.id.btn_sign_up)
+    Button btnSignUp;
+
     @Inject
-    LoginContract.Presenter presenter;
+    SignUpContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
         presenter.createView(this);
 
-        tvSignUP.setOnClickListener(v -> startActivity(new Intent(this, SignUpActivity.class)));
-
-        btnLogin.setOnClickListener(v -> presenter.login());
-
-        etPassword.setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                presenter.login();
-                return true;
-            }
-            return false;
-        });
+        btnSignUp.setOnClickListener(v -> presenter.signUp());
     }
 
     @Override
-    public String getId() {
+    public String getInputId() {
         return etId.getText().toString().trim();
     }
 
     @Override
-    public String getPassword() {
+    public String getInputPassword() {
         return etPassword.getText().toString().trim();
+    }
+
+    @Override
+    public String getInputReType() {
+        return etReType.getText().toString().trim();
     }
 
     @Override
@@ -71,18 +63,18 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     @Override
-    public void finishActivity() {
-        finish();
-    }
-
-    @Override
-    public void startMainActivity() {
-        startActivity(new Intent(this, MainActivity.class));
-    }
-
-    @Override
     public void toastShortId() {
         Toast.makeText(this, R.string.error_short_id, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void toastShortPassword() {
+        Toast.makeText(this, R.string.error_short_password, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void toastNotSamePassword() {
+        Toast.makeText(this, R.string.error_not_same_password, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -96,7 +88,14 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     @Override
-    public void toastShortPassword() {
-        Toast.makeText(this, R.string.error_short_password, Toast.LENGTH_SHORT).show();
+    public void toastUserAlreadyExists() {
+        Toast.makeText(this, R.string.error_user_already_exists, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void startMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

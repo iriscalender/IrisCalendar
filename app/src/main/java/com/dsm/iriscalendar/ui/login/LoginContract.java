@@ -1,7 +1,7 @@
 package com.dsm.iriscalendar.ui.login;
 
 import com.dsm.iriscalendar.base.BaseContract;
-import com.dsm.iriscalendar.data.model.LoginResponse;
+import com.dsm.iriscalendar.data.model.AuthResponse;
 
 import io.reactivex.Flowable;
 import retrofit2.Response;
@@ -19,12 +19,13 @@ public interface LoginContract {
         void toastShortId();
         void toastServerError();
         void toastInvalidValue();
+        void toastShortPassword();
 
         void finishActivity();
         void startMainActivity();
     }
 
     interface Repository {
-        Flowable<Response<LoginResponse>> login(String id, String password);
+        Flowable<Response<AuthResponse>> login(String id, String password);
     }
 }
