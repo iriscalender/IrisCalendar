@@ -1,19 +1,29 @@
-package com.dsm.iriscalendar.ui.activity;
+package com.dsm.iriscalendar.ui.timeSet;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.dsm.iriscalendar.R;
+import com.dsm.iriscalendar.base.BaseActivity;
+import com.dsm.iriscalendar.ui.activity.MainActivity;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.Objects;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TimeSetActivity extends AppCompatActivity {
+@SuppressLint("SimpleDateFormat")
+public class TimeSetActivity extends BaseActivity implements TimeSetContract.View {
 
     @BindView(R.id.tv_start_meridiem)
     TextView tvStartMeridiem;
@@ -53,11 +63,15 @@ public class TimeSetActivity extends AppCompatActivity {
 
     private boolean isStart = true;
 
+    @Inject
+    TimeSetContract.Presenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_set);
         ButterKnife.bind(this);
+        presenter.createView(this);
 
         npMeridiem.setMinValue(0);
         npMeridiem.setMaxValue(1);
@@ -131,7 +145,7 @@ public class TimeSetActivity extends AppCompatActivity {
 
         npHour.setOnValueChangedListener((numberPicker, i, i1) -> {
             if (isStart) {
-                tvStartHour.setText(String.valueOf(i));
+                tvStartHour.setText(String.valueOf(i1));
             } else {
                 tvEndHour.setText(String.valueOf(i1));
             }
@@ -153,9 +167,57 @@ public class TimeSetActivity extends AppCompatActivity {
             }
         });
 
-        btnSetTime.setOnClickListener(v -> {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        });
+        btnSetTime.setOnClickListener(v -> presenter.timeSet());
+    }
+
+    @Override
+    public String getStartTime() {
+        String time = tvStartHour.getText().toString() + ":" + tvStartMinute.getText().toString() + " " + tvStartMeridiem.getText().toString();
+        SimpleDateFormat simple12Format = new SimpleDateFormat("hh:mm a", Locale.US);
+        SimpleDateFormat simple24Format = new SimpleDateFormat("HH:mm", Locale.US);
+        try {
+            return simple24Format.format(Objects.requireNonNull(simple12Format.parse(time)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    @Override
+    public String getEndTime() {
+        String time = tvEndHour.getText().toString() + ":" + tvEndMinute.getText().toString() + " " + tvEndMeridiem.getText().toString();
+        SimpleDateFormat simple12Format = new SimpleDateFormat("hh:mm a", Locale.US);
+        SimpleDateFormat simple24Format = new SimpleDateFormat("HH:mm", Locale.US);
+        try {
+            return simple24Format.format(Objects.requireNonNull(simple12Format.parse(time)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    @Override
+    public void toastStartTimeFast() {
+        Toast.makeText(this, R.string.error_start_time_faster, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void toastSameTime() {
+        Toast.makeText(this, R.string.error_same_time, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void toastServerError() {
+        Toast.makeText(this, R.string.error_server_error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void toastInvalidValue() {
+        Toast.makeText(this, R.string.error_invalid_value, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void startMainActivity() {
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

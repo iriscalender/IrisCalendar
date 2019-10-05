@@ -14,4 +14,7 @@ public interface Api {
 
     @POST("auth/signup")
     Flowable<Response<AuthResponse>> signUp(@Body Object params);
+
+    @POST("time")
+    Flowable<Response<Object>> timeSet(@Body Object params);
 }
