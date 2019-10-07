@@ -1,6 +1,5 @@
 package com.dsm.iriscalendar.ui.timeSet;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -22,7 +21,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-@SuppressLint("SimpleDateFormat")
 public class TimeSetActivity extends BaseActivity implements TimeSetContract.View {
 
     @BindView(R.id.tv_start_meridiem)

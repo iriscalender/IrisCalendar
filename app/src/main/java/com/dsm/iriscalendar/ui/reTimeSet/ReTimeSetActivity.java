@@ -1,19 +1,25 @@
-package com.dsm.iriscalendar.ui.activity;
+package com.dsm.iriscalendar.ui.reTimeSet;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.dsm.iriscalendar.R;
+import com.dsm.iriscalendar.base.BaseActivity;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.Objects;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ReTimeSetActivity extends AppCompatActivity {
+public class ReTimeSetActivity extends BaseActivity implements ReTimeSetContract.View {
 
     @BindView(R.id.tv_start_meridiem)
     TextView tvStartMeridiem;
@@ -56,11 +62,16 @@ public class ReTimeSetActivity extends AppCompatActivity {
 
     private boolean isStart = true;
 
+    @Inject
+    ReTimeSetContract.Presenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_re_time_set);
         ButterKnife.bind(this);
+        presenter.createView(this);
+        presenter.getTimeSet();
 
         npMeridiem.setMinValue(0);
         npMeridiem.setMaxValue(1);
@@ -134,7 +145,7 @@ public class ReTimeSetActivity extends AppCompatActivity {
 
         npHour.setOnValueChangedListener((numberPicker, i, i1) -> {
             if (isStart) {
-                tvStartHour.setText(String.valueOf(i));
+                tvStartHour.setText(String.valueOf(i1));
             } else {
                 tvEndHour.setText(String.valueOf(i1));
             }
@@ -156,11 +167,111 @@ public class ReTimeSetActivity extends AppCompatActivity {
             }
         });
 
-        btnSetTime.setOnClickListener(v -> {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        });
+        btnSetTime.setOnClickListener(v -> presenter.timeSet());
 
         tvCancel.setOnClickListener(v -> finish());
+    }
+
+    @Override
+    public void setStartTime(String startTime) {
+        SimpleDateFormat simple12Format = new SimpleDateFormat("hh:mm a", Locale.US);
+        SimpleDateFormat simple24Format = new SimpleDateFormat("HH:mm", Locale.US);
+        String formattedTime = "";
+        try {
+            formattedTime = simple12Format.format(Objects.requireNonNull(simple24Format.parse(startTime)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String hour = formattedTime.split(":")[0];
+        String minute = formattedTime.split(":")[1].split(" ")[0];
+        String meridiem = formattedTime.split(":")[1].split(" ")[1];
+
+        tvStartHour.setText(hour);
+        tvStartMinute.setText(minute);
+        tvStartMeridiem.setText(meridiem);
+
+        npHour.setValue(Integer.parseInt(hour));
+        if (minute.equals("00")) {
+            npMinute.setValue(0);
+        } else {
+            npMinute.setValue(1);
+        }
+        if (meridiem.equals("AM")) {
+            npMeridiem.setValue(0);
+        } else {
+            npMeridiem.setValue(1);
+        }
+    }
+
+    @Override
+    public void setEndTime(String endTime) {
+        SimpleDateFormat simple12Format = new SimpleDateFormat("hh:mm a", Locale.US);
+        SimpleDateFormat simple24Format = new SimpleDateFormat("HH:mm", Locale.US);
+        String formattedTime = "";
+        try {
+            formattedTime = simple12Format.format(Objects.requireNonNull(simple24Format.parse(endTime)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String hour = formattedTime.split(":")[0];
+        String minute = formattedTime.split(":")[1].split(" ")[0];
+        String meridiem = formattedTime.split(":")[1].split(" ")[1];
+
+        tvEndHour.setText(hour);
+        tvEndMinute.setText(minute);
+        tvEndMeridiem.setText(meridiem);
+    }
+
+    @Override
+    public String getStartTime() {
+        String time = tvStartHour.getText().toString() + ":" + tvStartMinute.getText().toString() + " " + tvStartMeridiem.getText().toString();
+        SimpleDateFormat simple12Format = new SimpleDateFormat("hh:mm a", Locale.US);
+        SimpleDateFormat simple24Format = new SimpleDateFormat("HH:mm", Locale.US);
+        try {
+            return simple24Format.format(Objects.requireNonNull(simple12Format.parse(time)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    @Override
+    public String getEndTime() {
+        String time = tvEndHour.getText().toString() + ":" + tvEndMinute.getText().toString() + " " + tvEndMeridiem.getText().toString();
+        SimpleDateFormat simple12Format = new SimpleDateFormat("hh:mm a", Locale.US);
+        SimpleDateFormat simple24Format = new SimpleDateFormat("HH:mm", Locale.US);
+        try {
+            return simple24Format.format(Objects.requireNonNull(simple12Format.parse(time)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    @Override
+    public void toastSameTime() {
+        Toast.makeText(this, R.string.error_same_time, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void toastServerError() {
+        Toast.makeText(this, R.string.error_server_error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void toastStartTimeFast() {
+        Toast.makeText(this, R.string.error_start_time_faster, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void toastInvalidValue() {
+        Toast.makeText(this, R.string.error_invalid_value, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void finishActivity() {
+        finish();
     }
 }
