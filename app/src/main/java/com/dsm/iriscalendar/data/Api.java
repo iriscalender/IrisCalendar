@@ -1,6 +1,7 @@
 package com.dsm.iriscalendar.data;
 
 import com.dsm.iriscalendar.data.model.AuthResponse;
+import com.dsm.iriscalendar.data.model.Category;
 import com.dsm.iriscalendar.data.model.TimeResponse;
 
 import io.reactivex.Flowable;
@@ -27,4 +28,10 @@ public interface Api {
 
     @PATCH("time/{uuid}")
     Flowable<Response<Object>> updateTimeSet(@Body Object params, @Path("uuid") String uuid);
+
+    @GET("category")
+    Flowable<Response<Category>> getCategory();
+
+    @PATCH("category")
+    Flowable<Response<Category>> modifyCategory(@Body Category params);
 }

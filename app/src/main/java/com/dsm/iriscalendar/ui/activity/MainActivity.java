@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dsm.iriscalendar.R;
 import com.dsm.iriscalendar.Schedule;
 import com.dsm.iriscalendar.ui.adapter.ScheduleListAdapter;
+import com.dsm.iriscalendar.ui.category.CategoryActivity;
 import com.dsm.iriscalendar.ui.reTimeSet.ReTimeSetActivity;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements CalendarView.OnCa
 
         tvReTimeSet.setOnClickListener(v -> startActivity(new Intent(this, ReTimeSetActivity.class)));
 
-        tvModifyCategory.setOnClickListener(v -> startActivity(new Intent(this, ModifyCategoryActivity.class)));
+        tvModifyCategory.setOnClickListener(v -> startActivity(new Intent(this, CategoryActivity.class)));
 
         tvAddSchedule.setOnClickListener(v -> startActivity(new Intent(this, AddScheduleActivity.class)));
 

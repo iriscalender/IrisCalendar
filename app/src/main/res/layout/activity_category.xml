@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.ModifyCategoryActivity">
+    tools:context=".ui.category.CategoryActivity"
+    android:id="@+id/cl_parent">
 
     <View
         android:layout_width="0dp"
@@ -70,14 +71,30 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="100dp"/>
 
-    <TextView
-        android:id="@+id/tv_first"
+    <ViewSwitcher
+        android:id="@+id/vs_purple"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@id/view_first"
         app:layout_constraintTop_toTopOf="@id/view_first"
         app:layout_constraintBottom_toBottomOf="@id/view_first"
-        android:layout_marginStart="20dp"/>
+        android:layout_marginStart="20dp"
+        android:onClick="onViewSwitcherClick">
+        <TextView
+            android:id="@+id/tv_purple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_purple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLines="1"
+            android:inputType="text"
+            android:imeOptions="actionDone"/>
+    </ViewSwitcher>
+
 
     <View
         android:layout_width="12dp"
@@ -88,12 +105,28 @@
         app:layout_constraintTop_toBottomOf="@id/view_first"
         android:layout_marginTop="40dp" />
 
-    <TextView
+    <ViewSwitcher
+        android:id="@+id/vs_blue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@id/tv_first"
+        app:layout_constraintLeft_toLeftOf="@id/vs_purple"
         app:layout_constraintTop_toTopOf="@id/view_second"
-        app:layout_constraintBottom_toBottomOf="@id/view_second" />
+        app:layout_constraintBottom_toBottomOf="@id/view_second"
+        android:onClick="onViewSwitcherClick">
+        <TextView
+            android:id="@+id/tv_blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLines="1"
+            android:inputType="text"
+            android:imeOptions="actionDone"/>
+    </ViewSwitcher>
 
     <View
         android:layout_width="12dp"
@@ -104,12 +137,28 @@
         app:layout_constraintTop_toBottomOf="@id/view_second"
         android:layout_marginTop="40dp" />
 
-    <TextView
+    <ViewSwitcher
+        android:id="@+id/vs_pink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@id/tv_first"
+        app:layout_constraintLeft_toLeftOf="@id/vs_purple"
         app:layout_constraintTop_toTopOf="@id/view_third"
-        app:layout_constraintBottom_toBottomOf="@id/view_third" />
+        app:layout_constraintBottom_toBottomOf="@id/view_third"
+        android:onClick="onViewSwitcherClick">
+        <TextView
+            android:id="@+id/tv_pink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_pink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLines="1"
+            android:inputType="text"
+            android:imeOptions="actionDone"/>
+    </ViewSwitcher>
 
     <View
         android:layout_width="12dp"
@@ -120,11 +169,27 @@
         app:layout_constraintTop_toBottomOf="@id/view_third"
         android:layout_marginTop="40dp" />
 
-    <TextView
+    <ViewSwitcher
+        android:id="@+id/vs_orange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@id/tv_first"
+        app:layout_constraintLeft_toLeftOf="@id/vs_purple"
         app:layout_constraintTop_toTopOf="@id/view_fourth"
-        app:layout_constraintBottom_toBottomOf="@id/view_fourth" />
+        app:layout_constraintBottom_toBottomOf="@id/view_fourth"
+        android:onClick="onViewSwitcherClick">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_orange" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_orange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:inputType="text"
+            android:maxLines="1"
+            android:imeOptions="actionDone"/>
+    </ViewSwitcher>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
