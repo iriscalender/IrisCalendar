@@ -2,6 +2,7 @@ package com.dsm.iriscalendar.data;
 
 import com.dsm.iriscalendar.data.model.AuthResponse;
 import com.dsm.iriscalendar.data.model.Category;
+import com.dsm.iriscalendar.data.model.Schedule;
 import com.dsm.iriscalendar.data.model.TimeResponse;
 
 import io.reactivex.Flowable;
@@ -34,4 +35,7 @@ public interface Api {
 
     @PATCH("category")
     Flowable<Response<Category>> modifyCategory(@Body Category params);
+
+    @POST("calender")
+    Flowable<Response<Schedule>> addSchedule(@Body Object params);
 }

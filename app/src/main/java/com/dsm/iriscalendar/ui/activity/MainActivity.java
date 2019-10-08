@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dsm.iriscalendar.R;
 import com.dsm.iriscalendar.Schedule;
 import com.dsm.iriscalendar.ui.adapter.ScheduleListAdapter;
+import com.dsm.iriscalendar.ui.addSchedule.AddScheduleActivity;
 import com.dsm.iriscalendar.ui.category.CategoryActivity;
 import com.dsm.iriscalendar.ui.reTimeSet.ReTimeSetActivity;
 import com.haibin.calendarview.Calendar;

@@ -1,15 +1,18 @@
 package com.dsm.iriscalendar.di.injection;
 
+import com.dsm.iriscalendar.di.module.addSchedule.AddScheduleModule;
 import com.dsm.iriscalendar.di.module.category.CategoryModule;
 import com.dsm.iriscalendar.di.module.login.LoginModule;
 import com.dsm.iriscalendar.di.module.reTimeSet.ReTimeSetModule;
 import com.dsm.iriscalendar.di.module.signUp.SignUpModule;
 import com.dsm.iriscalendar.di.module.timeSet.TimeSetModule;
+import com.dsm.iriscalendar.di.scope.AddScheduleActivityScope;
 import com.dsm.iriscalendar.di.scope.CategoryActivityScope;
 import com.dsm.iriscalendar.di.scope.LoginActivityScope;
 import com.dsm.iriscalendar.di.scope.ReTimeSetActivityScope;
 import com.dsm.iriscalendar.di.scope.SignUpActivityScope;
 import com.dsm.iriscalendar.di.scope.TimeSetActivityScope;
+import com.dsm.iriscalendar.ui.addSchedule.AddScheduleActivity;
 import com.dsm.iriscalendar.ui.category.CategoryActivity;
 import com.dsm.iriscalendar.ui.login.LoginActivity;
 import com.dsm.iriscalendar.ui.reTimeSet.ReTimeSetActivity;
@@ -41,4 +44,8 @@ public abstract class InjectionActivityModule {
     @CategoryActivityScope
     @ContributesAndroidInjector(modules = CategoryModule.class)
     abstract CategoryActivity activityCategory();
+
+    @AddScheduleActivityScope
+    @ContributesAndroidInjector(modules = AddScheduleModule.class)
+    abstract AddScheduleActivity activityAddSchedule();
 }
