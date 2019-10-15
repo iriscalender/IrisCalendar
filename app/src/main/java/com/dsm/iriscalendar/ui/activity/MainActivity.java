@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dsm.iriscalendar.R;
 import com.dsm.iriscalendar.Schedule;
 import com.dsm.iriscalendar.ui.adapter.ScheduleListAdapter;
+import com.dsm.iriscalendar.ui.addFixedSchedule.AddFixedScheduleActivity;
 import com.dsm.iriscalendar.ui.addSchedule.AddScheduleActivity;
 import com.dsm.iriscalendar.ui.category.CategoryActivity;
 import com.dsm.iriscalendar.ui.reTimeSet.ReTimeSetActivity;
@@ -63,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements CalendarView.OnCa
     @BindView(R.id.tv_today)
     TextView tvToday;
 
+    @BindView(R.id.tv_add_fixed_schedule)
+    TextView tvAddFixedSchedule;
+
     private boolean isOpen = false;
 
     private Subject<Long> backSubject = BehaviorSubject.createDefault(0L).toSerialized();
@@ -92,6 +96,8 @@ public class MainActivity extends AppCompatActivity implements CalendarView.OnCa
         tvModifyCategory.setOnClickListener(v -> startActivity(new Intent(this, CategoryActivity.class)));
 
         tvAddSchedule.setOnClickListener(v -> startActivity(new Intent(this, AddScheduleActivity.class)));
+
+        tvAddFixedSchedule.setOnClickListener(v -> startActivity(new Intent(this, AddFixedScheduleActivity.class)));
 
         List<Schedule> listItems = new ArrayList<>();
         listItems.add(new Schedule("title", "time"));
