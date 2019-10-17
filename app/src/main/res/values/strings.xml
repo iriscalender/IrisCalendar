@@ -60,4 +60,5 @@
     <string name="error_same_time">시작과 끝 시간이 같습니다</string>
 
     <string name="success_category_modify">카테고리 수정에 성공했습니다</string>
+    <string name="schedule">일정</string>
 </resources>

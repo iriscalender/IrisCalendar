@@ -29,8 +29,7 @@
             android:name="firebase_crashlytics_collection_enabled"
             android:value="true" />
 
-        <activity android:name=".ui.addSchedule.AddScheduleActivity">
-        </activity>
+        <activity android:name=".ui.addSchedule.AddScheduleActivity" />
         <activity android:name=".ui.category.CategoryActivity" />
         <activity android:name=".ui.reTimeSet.ReTimeSetActivity" />
         <activity android:name=".ui.timeSet.TimeSetActivity" />

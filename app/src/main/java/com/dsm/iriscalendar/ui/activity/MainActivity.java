@@ -9,12 +9,12 @@ import android.view.ViewAnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dsm.iriscalendar.R;
 import com.dsm.iriscalendar.Schedule;
+import com.dsm.iriscalendar.base.BaseActivity;
 import com.dsm.iriscalendar.ui.adapter.ScheduleListAdapter;
 import com.dsm.iriscalendar.ui.addFixedSchedule.AddFixedScheduleActivity;
 import com.dsm.iriscalendar.ui.addSchedule.AddScheduleActivity;
@@ -28,6 +28,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -35,7 +37,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
 
-public class MainActivity extends AppCompatActivity implements CalendarView.OnCalendarSelectListener {
+public class MainActivity extends BaseActivity implements CalendarView.OnCalendarSelectListener, MainContract.View {
 
     @BindView(R.id.rv_schedule)
     RecyclerView rvSchedule;
@@ -66,6 +68,9 @@ public class MainActivity extends AppCompatActivity implements CalendarView.OnCa
 
     @BindView(R.id.tv_add_fixed_schedule)
     TextView tvAddFixedSchedule;
+
+    @Inject
+    MainContract.Presenter presenter;
 
     private boolean isOpen = false;
 

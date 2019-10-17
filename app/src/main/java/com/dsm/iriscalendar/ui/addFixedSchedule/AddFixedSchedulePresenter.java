@@ -1,0 +1,54 @@
+package com.dsm.iriscalendar.ui.addFixedSchedule;
+
+import com.dsm.iriscalendar.base.BasePresenter;
+
+public class AddFixedSchedulePresenter
+        extends BasePresenter<AddFixedScheduleContract.View>
+        implements AddFixedScheduleContract.Presenter {
+
+    private AddFixedScheduleContract.Repository repository;
+
+    public AddFixedSchedulePresenter(AddFixedScheduleContract.Repository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public void getCategory() {
+        addDisposable(
+                repository.getCategory().subscribe(
+                        response -> view.setCategory(response),
+                        throwable -> view.toastServerError()
+                )
+        );
+    }
+
+    @Override
+    public void addFixedSchedule() {
+        String category = view.getCategory();
+        String todo = view.getTodo();
+        String startTime = view.getStartTime();
+        String endTime = view.getEndTime();
+
+        if (category.isEmpty() || todo.isEmpty() || startTime.isEmpty() || endTime.isEmpty()) {
+            view.toastBlankError();
+            return;
+        }
+
+        addDisposable(
+                repository.addFixedSchedule(
+                        category,
+                        todo,
+                        startTime,
+                        endTime
+                ).subscribe(response -> {
+                    if (response.code() == 200) {
+                        view.finishActivity();
+                    } else if (response.code() == 409){
+                        view.toastImpossibleSchedule();
+                    } else {
+                        view.toastServerError();
+                    }
+                }, throwable -> view.toastServerError())
+        );
+    }
+}

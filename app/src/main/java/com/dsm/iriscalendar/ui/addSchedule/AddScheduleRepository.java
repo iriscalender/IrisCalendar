@@ -24,7 +24,6 @@ public class AddScheduleRepository implements AddScheduleContract.Repository {
     @Override
     public Flowable<Response<Schedule>> addSchedule(String category, String todo, String endTime, int requirementTime, boolean isParticularImportant) {
         Map<String, Object> params = new HashMap<>();
-        params.put("isAutomatic", false);
         params.put("category", category);
         params.put("calenderName", todo);
         params.put("endTime", endTime);

@@ -2,6 +2,7 @@ package com.dsm.iriscalendar.data;
 
 import com.dsm.iriscalendar.data.model.AuthResponse;
 import com.dsm.iriscalendar.data.model.Category;
+import com.dsm.iriscalendar.data.model.FixedSchedule;
 import com.dsm.iriscalendar.data.model.Schedule;
 import com.dsm.iriscalendar.data.model.TimeResponse;
 
@@ -36,6 +37,9 @@ public interface Api {
     @PATCH("category")
     Flowable<Response<Category>> modifyCategory(@Body Category params);
 
-    @POST("calender")
+    @POST("calendar/auto")
     Flowable<Response<Schedule>> addSchedule(@Body Object params);
+
+    @POST("calendar/manual")
+    Flowable<Response<FixedSchedule>> addFixedSchedule(@Body Object params);
 }

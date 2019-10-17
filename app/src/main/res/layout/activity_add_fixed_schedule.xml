@@ -187,7 +187,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="@string/end_date"
+            android:text="@string/schedule"
             android:textColor="@color/colorPrimaryLight"
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="@id/tv_todo"
@@ -295,27 +295,16 @@
             app:layout_constraintTop_toTopOf="@id/et_date" />
 
         <TextView
-            android:id="@+id/tv_required_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/required_time"
-            android:textColor="@color/colorPrimaryLight"
-            android:textSize="16sp"
-            app:layout_constraintLeft_toLeftOf="@id/et_year"
-            app:layout_constraintTop_toBottomOf="@id/et_year" />
-
-        <TextView
             android:id="@+id/tv_set_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="@string/set_start_time"
             android:textColor="@color/colorPrimaryLight"
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/tv_set_end"
-            app:layout_constraintTop_toBottomOf="@id/tv_required_time" />
+            app:layout_constraintTop_toBottomOf="@id/et_year" />
 
         <TextView
             android:id="@+id/tv_start_hour"
@@ -415,7 +404,6 @@
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/np_minute"
@@ -427,7 +415,6 @@
             android:id="@+id/np_minute"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/np_hour"
             app:layout_constraintLeft_toRightOf="@id/np_hour"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/np_hour" />
