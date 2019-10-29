@@ -13,7 +13,9 @@ public abstract class BaseActivity extends DaggerAppCompatActivity implements Ba
 
     @Override
     protected void onDestroy() {
-        presenter.destroyView();
+        if (presenter != null) {
+            presenter.destroyView();
+        }
         super.onDestroy();
     }
 }

@@ -19,10 +19,12 @@ import com.dsm.iriscalendar.ui.adapter.ScheduleListAdapter;
 import com.dsm.iriscalendar.ui.addFixedSchedule.AddFixedScheduleActivity;
 import com.dsm.iriscalendar.ui.addSchedule.AddScheduleActivity;
 import com.dsm.iriscalendar.ui.category.CategoryActivity;
+import com.dsm.iriscalendar.ui.dialog.LogoutDialog;
 import com.dsm.iriscalendar.ui.reTimeSet.ReTimeSetActivity;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
 
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -104,6 +106,12 @@ public class MainActivity extends BaseActivity implements CalendarView.OnCalenda
 
         tvAddFixedSchedule.setOnClickListener(v -> startActivity(new Intent(this, AddFixedScheduleActivity.class)));
 
+        findViewById(R.id.tv_logout).setOnClickListener(v -> new LogoutDialog().show(getSupportFragmentManager(), ""));
+
+        findViewById(R.id.iv_left).setOnClickListener(v -> calendarView.scrollToPre());
+
+        findViewById(R.id.iv_right).setOnClickListener(v -> calendarView.scrollToNext());
+
         List<Schedule> listItems = new ArrayList<>();
         listItems.add(new Schedule("title", "time"));
         listItems.add(new Schedule("title2", "time2"));
@@ -116,6 +124,8 @@ public class MainActivity extends BaseActivity implements CalendarView.OnCalenda
 
         int year = calendarView.getCurYear();
         int month = calendarView.getCurMonth();
+
+        ((TextView) findViewById(R.id.tv_calendar_month)).setText(new DateFormatSymbols().getMonths()[calendarView.getCurMonth() - 1]);
 
         calendarView.setOnCalendarSelectListener(this);
 
@@ -268,6 +278,7 @@ public class MainActivity extends BaseActivity implements CalendarView.OnCalenda
     @SuppressLint("SetTextI18n")
     @Override
     public void onCalendarSelect(Calendar calendar, boolean isClick) {
+        ((TextView) findViewById(R.id.tv_calendar_month)).setText(new DateFormatSymbols().getMonths()[calendar.getMonth() - 1]);
         tvToday.setText("Today " + calendar.getMonth() + " " + calendar.getDay());
     }
 }

@@ -61,4 +61,8 @@
 
     <string name="success_category_modify">카테고리 수정에 성공했습니다</string>
     <string name="schedule">일정</string>
+
+    <string name="ask_logout">정말 진심으로 \n로그아웃 하시겠습니까?</string>
+    <string name="yes">예</string>
+    <string name="no">아니요</string>
 </resources>
