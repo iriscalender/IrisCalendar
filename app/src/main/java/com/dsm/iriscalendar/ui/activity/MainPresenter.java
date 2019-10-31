@@ -9,4 +9,15 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     public MainPresenter(MainContract.Repository repository) {
         this.repository = repository;
     }
+
+    @Override
+    public void getCalendarBook() {
+        addDisposable(
+                repository.getCalendarBook()
+                        .subscribe(
+                                response -> view.setCalendarBook(response),
+                                throwable -> view.toastServerError()
+                        )
+        );
+    }
 }

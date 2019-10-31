@@ -1,6 +1,13 @@
 package com.dsm.iriscalendar.ui.activity;
 
 import com.dsm.iriscalendar.data.Api;
+import com.dsm.iriscalendar.data.model.CalendarBook;
+
+import java.util.List;
+
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainRepository implements MainContract.Repository {
 
@@ -8,5 +15,12 @@ public class MainRepository implements MainContract.Repository {
 
     public MainRepository(Api api) {
         this.api = api;
+    }
+
+    @Override
+    public Flowable<List<CalendarBook>> getCalendarBook() {
+        return api.getCalendarBook()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

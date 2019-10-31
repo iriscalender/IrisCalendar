@@ -1,10 +1,13 @@
 package com.dsm.iriscalendar.data;
 
 import com.dsm.iriscalendar.data.model.AuthResponse;
+import com.dsm.iriscalendar.data.model.CalendarBook;
 import com.dsm.iriscalendar.data.model.Category;
 import com.dsm.iriscalendar.data.model.FixedSchedule;
 import com.dsm.iriscalendar.data.model.Schedule;
 import com.dsm.iriscalendar.data.model.TimeResponse;
+
+import java.util.List;
 
 import io.reactivex.Flowable;
 import retrofit2.Response;
@@ -42,4 +45,7 @@ public interface Api {
 
     @POST("calendar/manual")
     Flowable<Response<FixedSchedule>> addFixedSchedule(@Body Object params);
+
+    @GET("calendar/book")
+    Flowable<List<CalendarBook>> getCalendarBook();
 }

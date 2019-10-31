@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dsm.iriscalendar.R;
 import com.dsm.iriscalendar.Schedule;
 import com.dsm.iriscalendar.base.BaseActivity;
+import com.dsm.iriscalendar.data.model.CalendarBook;
 import com.dsm.iriscalendar.ui.adapter.ScheduleListAdapter;
 import com.dsm.iriscalendar.ui.addFixedSchedule.AddFixedScheduleActivity;
 import com.dsm.iriscalendar.ui.addSchedule.AddScheduleActivity;
@@ -97,6 +98,8 @@ public class MainActivity extends BaseActivity implements CalendarView.OnCalenda
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        presenter.createView(this);
+        presenter.getCalendarBook();
 
         tvReTimeSet.setOnClickListener(v -> startActivity(new Intent(this, ReTimeSetActivity.class)));
 
@@ -122,34 +125,9 @@ public class MainActivity extends BaseActivity implements CalendarView.OnCalenda
         listItems.add(new Schedule("title7", "time7"));
         rvSchedule.setAdapter(new ScheduleListAdapter(listItems));
 
-        int year = calendarView.getCurYear();
-        int month = calendarView.getCurMonth();
-
         ((TextView) findViewById(R.id.tv_calendar_month)).setText(new DateFormatSymbols().getMonths()[calendarView.getCurMonth() - 1]);
 
         calendarView.setOnCalendarSelectListener(this);
-
-        Map<String, Calendar> map = new HashMap<>();
-        map.put(getSchemeCalendar(year, month, 3, 0xFF40db25).toString(),
-                getSchemeCalendar(year, month, 3, 0xFF40db25));
-        map.put(getSchemeCalendar(year, month, 6, 0xFFe69138).toString(),
-                getSchemeCalendar(year, month, 6, 0xFFe69138));
-        map.put(getSchemeCalendar(year, month, 9, 0xFFdf1356).toString(),
-                getSchemeCalendar(year, month, 9, 0xFFdf1356));
-        map.put(getSchemeCalendar(year, month, 13, 0xFFedc56d).toString(),
-                getSchemeCalendar(year, month, 13, 0xFFedc56d));
-        map.put(getSchemeCalendar(year, month, 14, 0xFFedc56d).toString(),
-                getSchemeCalendar(year, month, 14, 0xFFedc56d));
-        map.put(getSchemeCalendar(year, month, 15, 0xFFaacc44).toString(),
-                getSchemeCalendar(year, month, 15, 0xFFaacc44));
-        map.put(getSchemeCalendar(year, month, 18, 0xFFbc13f0).toString(),
-                getSchemeCalendar(year, month, 18, 0xFFbc13f0));
-        map.put(getSchemeCalendar(year, month, 25, 0xFF13acf0).toString(),
-                getSchemeCalendar(year, month, 25, 0xFF13acf0));
-        map.put(getSchemeCalendar(year, month, 27, 0xFF13acf0).toString(),
-                getSchemeCalendar(year, month, 27, 0xFF13acf0));
-
-        calendarView.setSchemeDate(map);
     }
 
     private Calendar getSchemeCalendar(int year, int month, int day, int color) {
@@ -280,5 +258,42 @@ public class MainActivity extends BaseActivity implements CalendarView.OnCalenda
     public void onCalendarSelect(Calendar calendar, boolean isClick) {
         ((TextView) findViewById(R.id.tv_calendar_month)).setText(new DateFormatSymbols().getMonths()[calendar.getMonth() - 1]);
         tvToday.setText("Today " + calendar.getMonth() + " " + calendar.getDay());
+    }
+
+    @Override
+    public void toastServerError() {
+        Toast.makeText(this, R.string.error_server_error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setCalendarBook(List<CalendarBook> calendarBook) {
+        Map<String, Calendar> result = new HashMap<>();
+
+        for (CalendarBook calendar : calendarBook) {
+            String calendarDate = calendar.getDate();
+            String year = calendarDate.split("-")[0];
+            String month = calendarDate.split("-")[1];
+            String date = calendarDate.split("-")[2];
+
+            int color = 0;
+            switch (calendar.getCategory()) {
+                case "purple":
+                    color = 0xFF7247B2;
+                    break;
+                case "blue":
+                    color = 0xFF3CB8EF;
+                    break;
+                case "pink":
+                    color = 0xFFD92D73;
+                    break;
+                case "orange":
+                    color = 0xFFFAA86B;
+                    break;
+            }
+            Calendar mapValue = getSchemeCalendar(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(date), color);
+            result.put(mapValue.toString(), mapValue);
+        }
+
+        calendarView.setSchemeDate(result);
     }
 }
