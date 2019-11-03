@@ -1,5 +1,6 @@
 package com.dsm.iriscalendar.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,17 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dsm.iriscalendar.R;
-import com.dsm.iriscalendar.Schedule;
+import com.dsm.iriscalendar.data.model.CalendarSchedule;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapter.ViewHolder> {
 
-    private List<Schedule> listItems;
-
-    public ScheduleListAdapter(List<Schedule> listItems) {
-        this.listItems = listItems;
-    }
+    private List<CalendarSchedule> listItems = new ArrayList<>();
 
     @NonNull
     @Override
@@ -48,10 +46,16 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
             tvTime = itemView.findViewById(R.id.tv_time);
         }
 
+        @SuppressLint("SetTextI18n")
         private void bind() {
-            Schedule item = listItems.get(getAdapterPosition());
-            tvTitle.setText(item.getTitle());
-            tvTime.setText(item.getTime());
+            CalendarSchedule item = listItems.get(getAdapterPosition());
+            tvTitle.setText(item.getCalendarName());
+            tvTime.setText(item.getStartTime().split(" ")[1] + " " + item.getEndTime().split(" ")[1]);
         }
+    }
+
+    public void setItems(List<CalendarSchedule> items) {
+        listItems = items;
+        notifyDataSetChanged();
     }
 }

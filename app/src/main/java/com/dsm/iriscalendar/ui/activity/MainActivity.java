@@ -13,9 +13,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dsm.iriscalendar.R;
-import com.dsm.iriscalendar.Schedule;
 import com.dsm.iriscalendar.base.BaseActivity;
 import com.dsm.iriscalendar.data.model.CalendarBook;
+import com.dsm.iriscalendar.data.model.CalendarSchedule;
 import com.dsm.iriscalendar.ui.adapter.ScheduleListAdapter;
 import com.dsm.iriscalendar.ui.addFixedSchedule.AddFixedScheduleActivity;
 import com.dsm.iriscalendar.ui.addSchedule.AddScheduleActivity;
@@ -26,9 +26,12 @@ import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
 
 import java.text.DateFormatSymbols;
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -77,6 +80,8 @@ public class MainActivity extends BaseActivity implements CalendarView.OnCalenda
 
     private boolean isOpen = false;
 
+    private ScheduleListAdapter adapter = new ScheduleListAdapter();
+
     private Subject<Long> backSubject = BehaviorSubject.createDefault(0L).toSerialized();
 
     private Disposable backSubjectDisposable = backSubject.buffer(2, 1)
@@ -115,17 +120,11 @@ public class MainActivity extends BaseActivity implements CalendarView.OnCalenda
 
         findViewById(R.id.iv_right).setOnClickListener(v -> calendarView.scrollToNext());
 
-        List<Schedule> listItems = new ArrayList<>();
-        listItems.add(new Schedule("title", "time"));
-        listItems.add(new Schedule("title2", "time2"));
-        listItems.add(new Schedule("title3", "time3"));
-        listItems.add(new Schedule("title4", "time4"));
-        listItems.add(new Schedule("title5", "time5"));
-        listItems.add(new Schedule("title6", "time6"));
-        listItems.add(new Schedule("title7", "time7"));
-        rvSchedule.setAdapter(new ScheduleListAdapter(listItems));
+        rvSchedule.setAdapter(adapter);
 
         ((TextView) findViewById(R.id.tv_calendar_month)).setText(new DateFormatSymbols().getMonths()[calendarView.getCurMonth() - 1]);
+
+        presenter.getCalendarSchedule(new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(new Date(System.currentTimeMillis())));
 
         calendarView.setOnCalendarSelectListener(this);
     }
@@ -257,7 +256,17 @@ public class MainActivity extends BaseActivity implements CalendarView.OnCalenda
     @Override
     public void onCalendarSelect(Calendar calendar, boolean isClick) {
         ((TextView) findViewById(R.id.tv_calendar_month)).setText(new DateFormatSymbols().getMonths()[calendar.getMonth() - 1]);
-        tvToday.setText("Today " + calendar.getMonth() + " " + calendar.getDay());
+        tvToday.setText(calendar.getMonth() + " " + calendar.getDay());
+        String date = calendar.getYear() + "-" + calendar.getMonth() + "-" + calendar.getDay();
+        try {
+            Date tempDate = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).parse(date);
+            assert tempDate != null;
+            date = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(tempDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        presenter.getCalendarSchedule(date);
     }
 
     @Override
@@ -295,5 +304,10 @@ public class MainActivity extends BaseActivity implements CalendarView.OnCalenda
         }
 
         calendarView.setSchemeDate(result);
+    }
+
+    @Override
+    public void setCalendarSchedule(List<CalendarSchedule> calendarSchedule) {
+        adapter.setItems(calendarSchedule);
     }
 }

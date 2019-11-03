@@ -2,6 +2,7 @@ package com.dsm.iriscalendar.data;
 
 import com.dsm.iriscalendar.data.model.AuthResponse;
 import com.dsm.iriscalendar.data.model.CalendarBook;
+import com.dsm.iriscalendar.data.model.CalendarSchedule;
 import com.dsm.iriscalendar.data.model.Category;
 import com.dsm.iriscalendar.data.model.FixedSchedule;
 import com.dsm.iriscalendar.data.model.Schedule;
@@ -48,4 +49,7 @@ public interface Api {
 
     @GET("calendar/book")
     Flowable<List<CalendarBook>> getCalendarBook();
+
+    @GET("calendar/{date}")
+    Flowable<List<CalendarSchedule>> getCalendarSchedule(@Path("date") String date);
 }

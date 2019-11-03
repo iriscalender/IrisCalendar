@@ -20,4 +20,15 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                         )
         );
     }
+
+    @Override
+    public void getCalendarSchedule(String date) {
+        addDisposable(
+                repository.getCalendarSchedule(date)
+                        .subscribe(
+                                response -> view.setCalendarSchedule(response),
+                                throwable -> view.toastServerError()
+                        )
+        );
+    }
 }
