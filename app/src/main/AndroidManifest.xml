@@ -17,8 +17,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".ui.addFixedSchedule.AddFixedScheduleActivity">
-        </activity>
+        <activity android:name=".ui.modifyFixedSchedule.ModifyFixedScheduleActivity" />
+        <activity android:name=".ui.modifySchedule.ModifyScheduleActivity" />
+        <activity android:name=".ui.addFixedSchedule.AddFixedScheduleActivity" />
 
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"

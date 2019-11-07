@@ -52,4 +52,13 @@ public interface Api {
 
     @GET("calendar/{date}")
     Flowable<List<CalendarSchedule>> getCalendarSchedule(@Path("date") String date);
+
+    @GET("calendar/manual/{id}")
+    Flowable<CalendarSchedule> getSchedule(@Path("id") int id);
+
+    @PATCH("calendar/manual/{id}")
+    Flowable<Response<CalendarSchedule>> modifySchedule(
+            @Path("id") int id,
+            @Body Object params
+    );
 }

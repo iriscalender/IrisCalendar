@@ -140,14 +140,15 @@ public class MainActivity extends BaseActivity implements CalendarView.OnCalenda
 
     public void viewMenu(View view) {
 
-        if (!isOpen) {
-            int x = layoutMain.getLeft();
-            int y = layoutMain.getTop();
+        int x = layoutMain.getLeft();
+        int y = layoutMain.getTop();
 
+        if (!isOpen) {
             int startRadius = 0;
             int endRadius = (int) Math.hypot(layoutMain.getWidth(), layoutMain.getHeight());
 
             Animator anim = ViewAnimationUtils.createCircularReveal(layoutMenu, x, y, startRadius, endRadius);
+            anim.setDuration(500);
 
             layoutMenu.setVisibility(View.VISIBLE);
             anim.start();
@@ -156,9 +157,6 @@ public class MainActivity extends BaseActivity implements CalendarView.OnCalenda
             isOpen = true;
 
         } else {
-            int x = layoutMenu.getLeft();
-            int y = layoutMenu.getTop();
-
             int startRadius = Math.max(layoutMain.getWidth(), layoutMain.getHeight());
             int endRadius = 0;
 
@@ -184,6 +182,7 @@ public class MainActivity extends BaseActivity implements CalendarView.OnCalenda
 
                 }
             });
+            anim.setDuration(500);
             anim.start();
             layoutMain.setVisibility(View.VISIBLE);
 
@@ -200,6 +199,7 @@ public class MainActivity extends BaseActivity implements CalendarView.OnCalenda
             int endRadius = (int) Math.hypot(layoutMain.getWidth(), layoutMain.getHeight());
 
             Animator anim = ViewAnimationUtils.createCircularReveal(layoutAdd, x, y, startRadius, endRadius);
+            anim.setDuration(500);
 
             layoutAdd.setVisibility(View.VISIBLE);
             anim.start();
@@ -235,6 +235,7 @@ public class MainActivity extends BaseActivity implements CalendarView.OnCalenda
 
                 }
             });
+            anim.setDuration(500);
             anim.start();
             layoutMain.setVisibility(View.VISIBLE);
 

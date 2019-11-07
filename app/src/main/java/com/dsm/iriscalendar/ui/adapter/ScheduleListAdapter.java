@@ -1,6 +1,8 @@
 package com.dsm.iriscalendar.ui.adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dsm.iriscalendar.R;
 import com.dsm.iriscalendar.data.model.CalendarSchedule;
+import com.dsm.iriscalendar.ui.modifyFixedSchedule.ModifyFixedScheduleActivity;
+import com.dsm.iriscalendar.ui.modifySchedule.ModifyScheduleActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +55,18 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
             CalendarSchedule item = listItems.get(getAdapterPosition());
             tvTitle.setText(item.getCalendarName());
             tvTime.setText(item.getStartTime().split(" ")[1] + " " + item.getEndTime().split(" ")[1]);
+            itemView.setOnClickListener(v -> {
+                Context context = itemView.getContext();
+                if (item.isAuto()) {
+                    Intent intent = new Intent(context, ModifyScheduleActivity.class);
+                    intent.putExtra("id", item.getId());
+                    context.startActivity(intent);
+                } else {
+                    Intent intent = new Intent(context, ModifyFixedScheduleActivity.class);
+                    intent.putExtra("id", item.getId());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 

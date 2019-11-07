@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.modifySchedule.ModifyScheduleActivity">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:background="@color/colorPrimaryLight"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/add_schedule"
+        android:textColor="@color/colorWhite"
+        android:textSize="22sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/cancel"
+        android:textColor="@color/colorWhite"
+        android:textSize="22sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/complete"
+        android:textColor="@color/colorWhite"
+        android:textSize="22sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="30dp"
+        android:background="@drawable/bg_round_white"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_cancel">
+
+        <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/category"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="@id/view"
+            app:layout_constraintTop_toTopOf="@id/view" />
+
+        <View
+            android:id="@+id/view_first"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_circle_purple"
+            android:onClick="onClickCategory"
+            app:layout_constraintLeft_toLeftOf="@id/view"
+            app:layout_constraintRight_toLeftOf="@id/view_second"
+            app:layout_constraintTop_toBottomOf="@id/tv_category" />
+
+        <TextView
+            android:id="@+id/tv_purple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/view_first"
+            app:layout_constraintRight_toRightOf="@id/view_first"
+            app:layout_constraintTop_toBottomOf="@id/view_first" />
+
+        <View
+            android:id="@+id/view_second"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/bg_circle_sky"
+            android:onClick="onClickCategory"
+            app:layout_constraintBottom_toBottomOf="@id/view_first"
+            app:layout_constraintLeft_toRightOf="@id/view_first"
+            app:layout_constraintRight_toLeftOf="@id/view_third"
+            app:layout_constraintTop_toTopOf="@id/view_first" />
+
+        <TextView
+            android:id="@+id/tv_blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/view_second"
+            app:layout_constraintRight_toRightOf="@id/view_second"
+            app:layout_constraintTop_toBottomOf="@id/view_second" />
+
+        <View
+            android:id="@+id/view_third"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/bg_circle_red"
+            android:onClick="onClickCategory"
+            app:layout_constraintBottom_toBottomOf="@id/view_second"
+            app:layout_constraintLeft_toRightOf="@id/view_second"
+            app:layout_constraintRight_toLeftOf="@id/view_fourth"
+            app:layout_constraintTop_toTopOf="@id/view_second" />
+
+        <TextView
+            android:id="@+id/tv_pink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/view_third"
+            app:layout_constraintRight_toRightOf="@id/view_third"
+            app:layout_constraintTop_toBottomOf="@id/view_third" />
+
+        <View
+            android:id="@+id/view_fourth"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/bg_circle_orange"
+            android:onClick="onClickCategory"
+            app:layout_constraintBottom_toBottomOf="@id/view_third"
+            app:layout_constraintLeft_toRightOf="@id/view_third"
+            app:layout_constraintRight_toRightOf="@id/view"
+            app:layout_constraintTop_toTopOf="@id/view_third" />
+
+        <TextView
+            android:id="@+id/tv_orange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/view_fourth"
+            app:layout_constraintRight_toRightOf="@id/view_fourth"
+            app:layout_constraintTop_toBottomOf="@id/view_fourth" />
+
+        <TextView
+            android:id="@+id/tv_todo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/todo"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="@id/tv_category"
+            app:layout_constraintTop_toBottomOf="@id/tv_purple" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_todo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:background="@null"
+            android:inputType="text"
+            android:maxLines="1"
+            android:nextFocusDown="@id/et_year"
+            app:layout_constraintLeft_toLeftOf="@id/tv_todo"
+            app:layout_constraintRight_toRightOf="@id/view"
+            app:layout_constraintTop_toBottomOf="@id/tv_todo" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#D5D5D5"
+            app:layout_constraintLeft_toLeftOf="@id/et_todo"
+            app:layout_constraintRight_toRightOf="@id/et_todo"
+            app:layout_constraintTop_toBottomOf="@id/et_todo" />
+
+        <TextView
+            android:id="@+id/tv_end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/end_date"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="@id/tv_todo"
+            app:layout_constraintTop_toBottomOf="@id/et_todo" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_year"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:inputType="number"
+            android:maxLength="4"
+            android:maxLines="1"
+            android:nextFocusDown="@id/et_month"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintLeft_toLeftOf="@id/tv_end_date"
+            app:layout_constraintRight_toLeftOf="@id/tv_year"
+            app:layout_constraintStart_toStartOf="@+id/tv_end_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_end_date" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#D5D5D5"
+            app:layout_constraintLeft_toLeftOf="@id/et_year"
+            app:layout_constraintRight_toRightOf="@id/et_year"
+            app:layout_constraintTop_toBottomOf="@id/et_year" />
+
+        <TextView
+            android:id="@+id/tv_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/year"
+            android:textColor="@color/colorPrimaryLight"
+            app:layout_constraintBottom_toBottomOf="@id/et_year"
+            app:layout_constraintLeft_toRightOf="@id/et_year"
+            app:layout_constraintRight_toLeftOf="@id/et_month"
+            app:layout_constraintTop_toTopOf="@id/et_year" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_month"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:inputType="number"
+            android:maxLength="2"
+            android:maxLines="1"
+            android:nextFocusDown="@id/et_date"
+            app:layout_constraintBottom_toBottomOf="@id/et_year"
+            app:layout_constraintLeft_toRightOf="@id/tv_year"
+            app:layout_constraintRight_toLeftOf="@id/tv_month"
+            app:layout_constraintTop_toTopOf="@id/et_year" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#D5D5D5"
+            app:layout_constraintLeft_toLeftOf="@id/et_month"
+            app:layout_constraintRight_toRightOf="@id/et_month"
+            app:layout_constraintTop_toBottomOf="@id/et_month" />
+
+        <TextView
+            android:id="@+id/tv_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/month"
+            android:textColor="@color/colorPrimaryLight"
+            app:layout_constraintBottom_toBottomOf="@id/et_month"
+            app:layout_constraintLeft_toRightOf="@id/et_month"
+            app:layout_constraintRight_toLeftOf="@id/et_date"
+            app:layout_constraintTop_toTopOf="@id/et_month" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_date"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:inputType="number"
+            android:maxLength="2"
+            android:maxLines="1"
+            android:nextFocusDown="@id/et_required_time"
+            app:layout_constraintBottom_toBottomOf="@id/et_month"
+            app:layout_constraintLeft_toRightOf="@id/tv_month"
+            app:layout_constraintRight_toLeftOf="@id/tv_date"
+            app:layout_constraintTop_toTopOf="@id/et_month" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#D5D5D5"
+            app:layout_constraintLeft_toLeftOf="@id/et_date"
+            app:layout_constraintRight_toRightOf="@id/et_date"
+            app:layout_constraintTop_toBottomOf="@id/et_date" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            android:textColor="@color/colorPrimaryLight"
+            app:layout_constraintBottom_toBottomOf="@id/et_date"
+            app:layout_constraintEnd_toEndOf="@+id/et_todo"
+            app:layout_constraintLeft_toRightOf="@id/et_date"
+            app:layout_constraintTop_toTopOf="@id/et_date" />
+
+        <TextView
+            android:id="@+id/tv_required_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/required_time"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="@id/tv_end_date"
+            app:layout_constraintTop_toBottomOf="@id/et_year" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_required_time"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:digits="0123456789"
+            android:inputType="number"
+            android:maxLines="1"
+            app:layout_constraintLeft_toLeftOf="@id/tv_required_time"
+            app:layout_constraintTop_toBottomOf="@id/tv_required_time" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#D5D5D5"
+            app:layout_constraintLeft_toLeftOf="@id/et_required_time"
+            app:layout_constraintRight_toRightOf="@id/et_required_time"
+            app:layout_constraintTop_toBottomOf="@id/et_required_time" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/time"
+            android:textColor="@color/colorPrimaryLight"
+            app:layout_constraintBottom_toBottomOf="@id/et_required_time"
+            app:layout_constraintLeft_toRightOf="@id/et_required_time"
+            app:layout_constraintTop_toTopOf="@id/et_required_time" />
+
+        <TextView
+            android:id="@+id/tv_important"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_not_important"
+            android:paddingStart="12dp"
+            android:paddingTop="7dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="7dp"
+            android:text="@string/important_schedule"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="@id/tv_date"
+            app:layout_constraintTop_toTopOf="@id/et_required_time" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
