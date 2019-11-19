@@ -9,4 +9,21 @@ public class ModifyFixedSchedulePresenter extends BasePresenter<ModifyFixedSched
     public ModifyFixedSchedulePresenter(ModifyFixedScheduleContract.Repository repository) {
         this.repository = repository;
     }
+
+    @Override
+    public void getCategory() {
+        addDisposable(
+                repository.getCategory()
+                        .subscribe(
+                                response -> view.setCategory(response),
+                                throwable -> view.toastServerError()
+                        )
+        );
+
+    }
+
+    @Override
+    public void getFixedSchedule() {
+
+    }
 }

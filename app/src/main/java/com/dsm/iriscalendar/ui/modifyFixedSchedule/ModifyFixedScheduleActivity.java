@@ -3,9 +3,12 @@ package com.dsm.iriscalendar.ui.modifyFixedSchedule;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dsm.iriscalendar.R;
 import com.dsm.iriscalendar.base.BaseActivity;
+import com.dsm.iriscalendar.data.model.Category;
 
 import javax.inject.Inject;
 
@@ -45,8 +48,8 @@ public class ModifyFixedScheduleActivity extends BaseActivity implements ModifyF
         ButterKnife.bind(this);
         presenter.createView(this);
         animBig.setFillAfter(true);
-        upState = R.id.view_first;
-        viewFirst.startAnimation(animBig);
+
+        presenter.getCategory();
     }
 
     public void onClickCategory(View v) {
@@ -84,5 +87,18 @@ public class ModifyFixedScheduleActivity extends BaseActivity implements ModifyF
             viewFourth.startAnimation(animBig);
             upState = R.id.view_fourth;
         }
+    }
+
+    @Override
+    public void setCategory(Category category) {
+        ((TextView) findViewById(R.id.tv_purple)).setText(category.getPurple());
+        ((TextView) findViewById(R.id.tv_blue)).setText(category.getBlue());
+        ((TextView) findViewById(R.id.tv_pink)).setText(category.getPink());
+        ((TextView) findViewById(R.id.tv_orange)).setText(category.getOrange());
+    }
+
+    @Override
+    public void toastServerError() {
+        Toast.makeText(this, R.string.error_server_error, Toast.LENGTH_SHORT).show();
     }
 }
