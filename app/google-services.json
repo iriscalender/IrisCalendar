@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "443312582401",
+    "firebase_url": "https://iriscalendar-3a631.firebaseio.com",
+    "project_id": "iriscalendar-3a631",
+    "storage_bucket": "iriscalendar-3a631.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443312582401:android:985d33158aa3d0c5dcf500",
+        "android_client_info": {
+          "package_name": "com.dsm.iriscalendar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443312582401-98nlkik00e9cer511d7ovk3pe2j7vc4v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dsm.iriscalendar",
+            "certificate_hash": "4873a0a1de6e3313551d7b627262c2b08c822c78"
+          }
+        },
+        {
+          "client_id": "443312582401-1sp0ei1sbrujk033q061istogbc71vgn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtIhGaTU5CL9dMqu_4SosLcF3lsoruQjU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443312582401-1sp0ei1sbrujk033q061istogbc71vgn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
