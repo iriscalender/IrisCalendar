@@ -61,97 +61,13 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_cancel">
 
-        <TextView
-            android:id="@+id/tv_category"
-            android:layout_width="wrap_content"
+        <com.dsm.iriscalendar.ui.custom.CategoryView
+            android:id="@+id/cv_modify_schedule"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:text="@string/category"
-            android:textColor="@color/colorPrimaryLight"
-            android:textSize="16sp"
-            app:layout_constraintLeft_toLeftOf="@id/view"
-            app:layout_constraintTop_toTopOf="@id/view" />
-
-        <View
-            android:id="@+id/view_first"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bg_circle_purple"
-            android:onClick="onClickCategory"
-            app:layout_constraintLeft_toLeftOf="@id/view"
-            app:layout_constraintRight_toLeftOf="@id/view_second"
-            app:layout_constraintTop_toBottomOf="@id/tv_category" />
-
-        <TextView
-            android:id="@+id/tv_purple"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@id/view_first"
-            app:layout_constraintRight_toRightOf="@id/view_first"
-            app:layout_constraintTop_toBottomOf="@id/view_first"
-            android:layout_marginTop="4dp"/>
-
-        <View
-            android:id="@+id/view_second"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:background="@drawable/bg_circle_sky"
-            android:onClick="onClickCategory"
-            app:layout_constraintBottom_toBottomOf="@id/view_first"
-            app:layout_constraintLeft_toRightOf="@id/view_first"
-            app:layout_constraintRight_toLeftOf="@id/view_third"
-            app:layout_constraintTop_toTopOf="@id/view_first" />
-
-        <TextView
-            android:id="@+id/tv_blue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@id/view_second"
-            app:layout_constraintRight_toRightOf="@id/view_second"
-            app:layout_constraintTop_toBottomOf="@id/view_second"
-            android:layout_marginTop="4dp"/>
-
-        <View
-            android:id="@+id/view_third"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:background="@drawable/bg_circle_red"
-            android:onClick="onClickCategory"
-            app:layout_constraintBottom_toBottomOf="@id/view_second"
-            app:layout_constraintLeft_toRightOf="@id/view_second"
-            app:layout_constraintRight_toLeftOf="@id/view_fourth"
-            app:layout_constraintTop_toTopOf="@id/view_second" />
-
-        <TextView
-            android:id="@+id/tv_pink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@id/view_third"
-            app:layout_constraintRight_toRightOf="@id/view_third"
-            app:layout_constraintTop_toBottomOf="@id/view_third"
-            android:layout_marginTop="4dp"/>
-
-        <View
-            android:id="@+id/view_fourth"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:background="@drawable/bg_circle_orange"
-            android:onClick="onClickCategory"
-            app:layout_constraintBottom_toBottomOf="@id/view_third"
-            app:layout_constraintLeft_toRightOf="@id/view_third"
-            app:layout_constraintRight_toRightOf="@id/view"
-            app:layout_constraintTop_toTopOf="@id/view_third" />
-
-        <TextView
-            android:id="@+id/tv_orange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@id/view_fourth"
-            app:layout_constraintRight_toRightOf="@id/view_fourth"
-            app:layout_constraintTop_toBottomOf="@id/view_fourth"
-            android:layout_marginTop="4dp"/>
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_todo"
@@ -161,8 +77,9 @@
             android:text="@string/todo"
             android:textColor="@color/colorPrimaryLight"
             android:textSize="16sp"
-            app:layout_constraintLeft_toLeftOf="@id/tv_category"
-            app:layout_constraintTop_toBottomOf="@id/tv_purple" />
+            app:layout_constraintLeft_toLeftOf="@id/cv_modify_schedule"
+            app:layout_constraintTop_toBottomOf="@id/cv_modify_schedule"
+            android:layout_marginStart="30dp"/>
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_todo"
