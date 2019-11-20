@@ -50,6 +50,7 @@ cache:
 
 notifications:
   email:
-    - dikolight203@gmail.com
-    on_success: never
-    on_failure: always
+      recipients:
+        - dikolight203@gmail.com
+      on_success: never
+      on_failure: always
