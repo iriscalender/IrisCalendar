@@ -1,7 +1,7 @@
 package com.dsm.iriscalendar;
 
-import com.dsm.iriscalendar.ui.activity.MainContract;
-import com.dsm.iriscalendar.ui.activity.MainPresenter;
+import com.dsm.iriscalendar.ui.main.MainContract;
+import com.dsm.iriscalendar.ui.main.MainPresenter;
 
 import org.junit.Before;
 import org.junit.Test;

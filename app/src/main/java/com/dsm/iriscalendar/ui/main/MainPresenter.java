@@ -1,4 +1,4 @@
-package com.dsm.iriscalendar.ui.activity;
+package com.dsm.iriscalendar.ui.main;
 
 import com.dsm.iriscalendar.base.BasePresenter;
 

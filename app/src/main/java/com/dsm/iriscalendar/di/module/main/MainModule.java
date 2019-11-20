@@ -2,9 +2,9 @@ package com.dsm.iriscalendar.di.module.main;
 
 import com.dsm.iriscalendar.data.Api;
 import com.dsm.iriscalendar.di.scope.MainActivityScope;
-import com.dsm.iriscalendar.ui.activity.MainContract;
-import com.dsm.iriscalendar.ui.activity.MainPresenter;
-import com.dsm.iriscalendar.ui.activity.MainRepository;
+import com.dsm.iriscalendar.ui.main.MainContract;
+import com.dsm.iriscalendar.ui.main.MainPresenter;
+import com.dsm.iriscalendar.ui.main.MainRepository;
 
 import dagger.Module;
 import dagger.Provides;

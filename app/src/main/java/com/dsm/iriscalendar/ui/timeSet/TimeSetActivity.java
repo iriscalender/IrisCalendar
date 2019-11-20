@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.dsm.iriscalendar.R;
 import com.dsm.iriscalendar.base.BaseActivity;
-import com.dsm.iriscalendar.ui.activity.MainActivity;
+import com.dsm.iriscalendar.ui.main.MainActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
