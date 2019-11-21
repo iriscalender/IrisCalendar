@@ -1,4 +1,4 @@
-package com.dsm.iriscalendar;
+package com.dsm.iriscalendar.presenter;
 
 import com.dsm.iriscalendar.data.model.AuthResponse;
 import com.dsm.iriscalendar.ui.signUp.SignUpContract;

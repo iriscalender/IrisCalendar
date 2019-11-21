@@ -1,4 +1,4 @@
-package com.dsm.iriscalendar;
+package com.dsm.iriscalendar.presenter;
 
 import com.dsm.iriscalendar.data.model.Category;
 import com.dsm.iriscalendar.data.model.FixedSchedule;

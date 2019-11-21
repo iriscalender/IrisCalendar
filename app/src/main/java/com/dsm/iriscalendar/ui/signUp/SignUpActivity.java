@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dsm.iriscalendar.R;
-import com.dsm.iriscalendar.base.BaseActivity;
+import com.dsm.iriscalendar.base.BaseActivityMVP;
 import com.dsm.iriscalendar.ui.main.MainActivity;
 
 import javax.inject.Inject;
@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SignUpActivity extends BaseActivity implements SignUpContract.View {
+public class SignUpActivity extends BaseActivityMVP implements SignUpContract.View {
 
     @BindView(R.id.et_id)
     EditText etId;

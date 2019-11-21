@@ -1,4 +1,4 @@
-package com.dsm.iriscalendar;
+package com.dsm.iriscalendar.presenter;
 
 import com.dsm.iriscalendar.ui.main.MainContract;
 import com.dsm.iriscalendar.ui.main.MainPresenter;

@@ -8,7 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dsm.iriscalendar.R;
-import com.dsm.iriscalendar.base.BaseActivity;
+import com.dsm.iriscalendar.base.BaseActivityMVP;
 import com.dsm.iriscalendar.ui.main.MainActivity;
 
 import java.text.ParseException;
@@ -21,7 +21,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TimeSetActivity extends BaseActivity implements TimeSetContract.View {
+public class TimeSetActivity extends BaseActivityMVP implements TimeSetContract.View {
 
     @BindView(R.id.tv_start_meridiem)
     TextView tvStartMeridiem;

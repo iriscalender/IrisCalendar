@@ -13,7 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dsm.iriscalendar.R;
-import com.dsm.iriscalendar.base.BaseActivity;
+import com.dsm.iriscalendar.base.BaseActivityMVP;
 import com.dsm.iriscalendar.data.model.CalendarBook;
 import com.dsm.iriscalendar.data.model.CalendarSchedule;
 import com.dsm.iriscalendar.ui.adapter.ScheduleListAdapter;
@@ -43,7 +43,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
 
-public class MainActivity extends BaseActivity implements CalendarView.OnCalendarSelectListener, MainContract.View {
+public class MainActivity extends BaseActivityMVP implements CalendarView.OnCalendarSelectListener, MainContract.View {
 
     @BindView(R.id.rv_schedule)
     RecyclerView rvSchedule;

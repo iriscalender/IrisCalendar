@@ -1,8 +1,7 @@
-package com.dsm.iriscalendar;
+package com.dsm.iriscalendar.presenter;
 
-import com.dsm.iriscalendar.data.model.TimeResponse;
-import com.dsm.iriscalendar.ui.reTimeSet.ReTimeSetContract;
-import com.dsm.iriscalendar.ui.reTimeSet.ReTimeSetPresenter;
+import com.dsm.iriscalendar.ui.timeSet.TimeSetContract;
+import com.dsm.iriscalendar.ui.timeSet.TimeSetPresenter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,33 +14,21 @@ import retrofit2.Response;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class ReTimeSetPresenterTests {
+public class TimeSetPresenterTests {
 
     @Mock
-    private ReTimeSetContract.View view;
+    private TimeSetContract.View view;
 
     @Mock
-    private ReTimeSetContract.Repository repository;
+    private TimeSetContract.Repository repository;
 
-    private ReTimeSetContract.Presenter presenter;
+    private TimeSetContract.Presenter presenter;
 
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        presenter = new ReTimeSetPresenter(repository);
+        presenter = new TimeSetPresenter(repository);
         presenter.createView(view);
-    }
-
-    @Test
-    public void getTimeSuccessTest() {
-        TimeResponse response = new TimeResponse("START", "END");
-        when(repository.getTimeSet())
-                .thenReturn(Flowable.just(response));
-
-        presenter.getTimeSet();
-
-        verify(view).setStartTime(response.getStartTime());
-        verify(view).setEndTime(response.getEndTime());
     }
 
     @Test
@@ -79,11 +66,11 @@ public class ReTimeSetPresenterTests {
         when(view.getStartTime()).thenReturn("11:30");
         when(view.getEndTime()).thenReturn("12:29");
 
-        when(repository.updateTimeSet(view.getStartTime(), view.getEndTime()))
+        when(repository.timeSet(view.getStartTime(), view.getEndTime()))
                 .thenReturn(Flowable.just(Response.success(200, new Object())));
 
         presenter.timeSet();
 
-        verify(view).finishActivity();
+        verify(view).startMainActivity();
     }
 }

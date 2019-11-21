@@ -2,10 +2,11 @@ package com.dsm.iriscalendar.di.module.login;
 
 import com.dsm.iriscalendar.data.Api;
 import com.dsm.iriscalendar.data.local.PrefHelper;
+import com.dsm.iriscalendar.data.repository.login.LoginRepository;
+import com.dsm.iriscalendar.data.repository.login.LoginRepositoryImpl;
 import com.dsm.iriscalendar.di.scope.LoginActivityScope;
-import com.dsm.iriscalendar.ui.login.LoginContract;
-import com.dsm.iriscalendar.ui.login.LoginPresenter;
-import com.dsm.iriscalendar.ui.login.LoginRepository;
+import com.dsm.iriscalendar.ui.login.LoginViewModel;
+import com.dsm.iriscalendar.ui.login.LoginViewModelFactory;
 
 import dagger.Module;
 import dagger.Provides;
@@ -15,13 +16,19 @@ public class LoginModule {
 
     @LoginActivityScope
     @Provides
-    LoginContract.Repository provideLoginRepository(Api api, PrefHelper prefHelper) {
-        return new LoginRepository(api, prefHelper);
+    LoginRepository provideLoginRepository(Api api, PrefHelper prefHelper) {
+        return new LoginRepositoryImpl(api, prefHelper);
     }
 
     @Provides
     @LoginActivityScope
-    LoginContract.Presenter providePresenter(LoginContract.Repository repository) {
-        return new LoginPresenter(repository);
+    LoginViewModelFactory provideLoginViewModelFactory(LoginRepository loginRepository) {
+        return new LoginViewModelFactory(loginRepository);
+    }
+
+    @Provides
+    @LoginActivityScope
+    LoginViewModel provideLoginViewModel(LoginViewModelFactory loginViewModelFactory) {
+        return loginViewModelFactory.create(LoginViewModel.class);
     }
 }

@@ -7,7 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dsm.iriscalendar.R;
-import com.dsm.iriscalendar.base.BaseActivity;
+import com.dsm.iriscalendar.base.BaseActivityMVP;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,7 +19,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ReTimeSetActivity extends BaseActivity implements ReTimeSetContract.View {
+public class ReTimeSetActivity extends BaseActivityMVP implements ReTimeSetContract.View {
 
     @BindView(R.id.tv_start_meridiem)
     TextView tvStartMeridiem;

@@ -1,142 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.login.LoginActivity">
+<layout>
 
-    <TextView
-        android:id="@+id/tv_app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textColor="@color/colorPrimary"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/iv_person"
-        app:layout_constraintLeft_toLeftOf="@id/guideline"
-        app:layout_constraintRight_toRightOf="@id/guideline2"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp"/>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.dsm.iriscalendar.ui.login.LoginViewModel" />
+    </data>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_person"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:src="@drawable/ic_person"
-        app:layout_constraintLeft_toLeftOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/tv_app_name"
-        android:layout_marginTop="100dp"/>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.login.LoginActivity">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_id"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:background="@null"
-        android:hint="@string/id"
-        app:layout_constraintBottom_toBottomOf="@id/iv_person"
-        app:layout_constraintLeft_toRightOf="@id/iv_person"
-        app:layout_constraintRight_toRightOf="@id/guideline2"
-        app:layout_constraintTop_toTopOf="@id/iv_person"
-        android:nextFocusDown="@id/et_password"
-        android:maxLines="1"/>
+        <TextView
+            android:id="@+id/tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="@string/app_name"
+            android:textColor="@color/colorPrimary"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/iv_person"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="@id/guideline2"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/line1"
-        android:layout_width="0dp"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="6dp"
-        android:background="@color/colorSky"
-        app:layout_constraintBottom_toTopOf="@id/iv_lock"
-        app:layout_constraintLeft_toLeftOf="@id/guideline"
-        app:layout_constraintRight_toRightOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/iv_person" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/ic_person"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/tv_app_name" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_lock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lock"
-        android:layout_marginTop="50dp"
-        app:layout_constraintLeft_toLeftOf="@id/iv_person"
-        app:layout_constraintTop_toBottomOf="@id/line1" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@null"
+            android:hint="@string/id"
+            android:maxLines="1"
+            android:nextFocusDown="@id/et_password"
+            app:layout_constraintBottom_toBottomOf="@id/iv_person"
+            app:layout_constraintLeft_toRightOf="@id/iv_person"
+            app:layout_constraintRight_toRightOf="@id/guideline2"
+            app:layout_constraintTop_toTopOf="@id/iv_person"
+            android:text="@={viewModel.id}"/>
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:hint="@string/password"
-        app:layout_constraintBottom_toBottomOf="@id/iv_lock"
-        app:layout_constraintLeft_toLeftOf="@id/et_id"
-        app:layout_constraintTop_toTopOf="@id/iv_lock"
-        app:layout_constraintRight_toRightOf="@id/guideline2"
-        android:imeOptions="actionDone"
-        android:maxLines="1"/>
+        <View
+            android:id="@+id/line1"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/colorSky"
+            app:layout_constraintBottom_toTopOf="@id/iv_lock"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="@id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/iv_person" />
 
-    <View
-        android:id="@+id/line2"
-        android:layout_width="0dp"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="6dp"
-        android:background="@color/colorSky"
-        app:layout_constraintLeft_toLeftOf="@id/guideline"
-        app:layout_constraintRight_toRightOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/iv_lock" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/ic_lock"
+            app:layout_constraintLeft_toLeftOf="@id/iv_person"
+            app:layout_constraintTop_toBottomOf="@id/line1" />
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_round_primary"
-        android:text="@string/login"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="@id/guideline"
-        app:layout_constraintRight_toRightOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/line2"
-        android:layout_marginTop="30dp"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/password"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="@id/iv_lock"
+            app:layout_constraintLeft_toLeftOf="@id/et_id"
+            app:layout_constraintRight_toRightOf="@id/guideline2"
+            app:layout_constraintTop_toTopOf="@id/iv_lock"
+            android:text="@={viewModel.password}"/>
 
-    <TextView
-        android:id="@+id/tv_not_member"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/not_member"
-        android:textSize="12sp"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintLeft_toLeftOf="@id/guideline"
-        app:layout_constraintRight_toLeftOf="@id/tv_sign_up"
-        app:layout_constraintTop_toBottomOf="@id/btn_login"
-        android:layout_marginTop="20dp"/>
+        <View
+            android:id="@+id/line2"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/colorSky"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="@id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/iv_lock" />
 
-    <TextView
-        android:id="@+id/tv_sign_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_up"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@id/tv_not_member"
-        app:layout_constraintLeft_toRightOf="@id/tv_not_member"
-        app:layout_constraintRight_toRightOf="@id/guideline2"
-        app:layout_constraintTop_toTopOf="@id/tv_not_member"
-        android:layout_marginStart="10dp"
-        android:textSize="16sp"/>
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@{viewModel.isLoginEnable ? @drawable/bg_round_primary : @drawable/bg_round_grey}"
+            android:text="@string/login"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="@id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/line2"
+            android:onClick="@{() -> viewModel.login()}"
+            android:clickable="@{viewModel.isLoginEnable}"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="54dp" />
+        <TextView
+            android:id="@+id/tv_not_member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/not_member"
+            android:textSize="12sp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintRight_toLeftOf="@id/tv_sign_up"
+            app:layout_constraintTop_toBottomOf="@id/btn_login" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="54dp" />
+        <TextView
+            android:id="@+id/tv_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/sign_up"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_not_member"
+            app:layout_constraintLeft_toRightOf="@id/tv_not_member"
+            app:layout_constraintRight_toRightOf="@id/guideline2"
+            app:layout_constraintTop_toTopOf="@id/tv_not_member" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="54dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="54dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

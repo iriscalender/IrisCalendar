@@ -1,15 +1,13 @@
 package com.dsm.iriscalendar.ui.addFixedSchedule;
 
 import android.os.Bundle;
-import android.view.View;
-import android.view.animation.Animation;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dsm.iriscalendar.R;
-import com.dsm.iriscalendar.base.BaseActivity;
+import com.dsm.iriscalendar.base.BaseActivityMVP;
 import com.dsm.iriscalendar.data.model.Category;
 import com.dsm.iriscalendar.ui.custom.CategoryView;
 
@@ -20,11 +18,10 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
-import butterknife.BindAnim;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddFixedScheduleActivity extends BaseActivity implements AddFixedScheduleContract.View {
+public class AddFixedScheduleActivity extends BaseActivityMVP implements AddFixedScheduleContract.View {
 
     @BindView(R.id.np_hour) NumberPicker npHour;
 

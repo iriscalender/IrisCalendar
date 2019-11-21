@@ -5,7 +5,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dsm.iriscalendar.R;
-import com.dsm.iriscalendar.base.BaseActivity;
+import com.dsm.iriscalendar.base.BaseActivityMVP;
 import com.dsm.iriscalendar.data.model.CalendarSchedule;
 import com.dsm.iriscalendar.data.model.Category;
 import com.dsm.iriscalendar.ui.custom.CategoryView;
@@ -21,7 +21,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ModifyScheduleActivity extends BaseActivity implements ModifyScheduleContract.View {
+public class ModifyScheduleActivity extends BaseActivityMVP implements ModifyScheduleContract.View {
 
     @BindView(R.id.et_todo) EditText etTodo;
 
