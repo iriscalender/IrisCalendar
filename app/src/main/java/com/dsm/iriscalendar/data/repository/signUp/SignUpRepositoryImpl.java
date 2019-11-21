@@ -1,4 +1,4 @@
-package com.dsm.iriscalendar.ui.signUp;
+package com.dsm.iriscalendar.data.repository.signUp;
 
 import com.dsm.iriscalendar.data.Api;
 import com.dsm.iriscalendar.data.local.PrefHelper;
@@ -12,18 +12,18 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
-public class SignUpRepository implements SignUpContract.Repository {
+public class SignUpRepositoryImpl implements SignUpRepository {
 
     private Api api;
     private PrefHelper prefHelper;
 
-    public SignUpRepository(Api api, PrefHelper prefHelper) {
+    public SignUpRepositoryImpl(Api api, PrefHelper prefHelper) {
         this.api = api;
         this.prefHelper = prefHelper;
     }
 
     @Override
-    public Flowable<Response<AuthResponse>> signUp(String id, String password, String reType) {
+    public Flowable<Integer> signUp(String id, String password, String reType) {
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
         params.put("password1", password);
@@ -39,6 +39,7 @@ public class SignUpRepository implements SignUpContract.Repository {
                             prefHelper.saveToken(body.getToken());
                         }
                     }
-                });
+                })
+                .map(Response::code);
     }
 }
