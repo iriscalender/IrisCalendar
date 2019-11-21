@@ -1,7 +1,6 @@
 package com.dsm.iriscalendar.ui.main;
 
 import android.animation.Animator;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,70 +12,41 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dsm.iriscalendar.R;
-import com.dsm.iriscalendar.base.BaseActivityMVP;
-import com.dsm.iriscalendar.data.model.CalendarBook;
-import com.dsm.iriscalendar.data.model.CalendarSchedule;
+import com.dsm.iriscalendar.base.BaseActivity;
+import com.dsm.iriscalendar.databinding.ActivityMainBinding;
 import com.dsm.iriscalendar.ui.adapter.ScheduleListAdapter;
 import com.dsm.iriscalendar.ui.addFixedSchedule.AddFixedScheduleActivity;
 import com.dsm.iriscalendar.ui.addSchedule.AddScheduleActivity;
 import com.dsm.iriscalendar.ui.category.CategoryActivity;
 import com.dsm.iriscalendar.ui.dialog.LogoutDialog;
 import com.dsm.iriscalendar.ui.reTimeSet.ReTimeSetActivity;
+import com.dsm.iriscalendar.util.TimeUtil;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
 
 import java.text.DateFormatSymbols;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
 
-public class MainActivity extends BaseActivityMVP implements CalendarView.OnCalendarSelectListener, MainContract.View {
+public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
-    @BindView(R.id.rv_schedule)
-    RecyclerView rvSchedule;
+    @BindView(R.id.rv_schedule) RecyclerView rvSchedule;
 
-    @BindView(R.id.layoutMain)
-    ConstraintLayout layoutMain;
+    @BindView(R.id.layoutMain) ConstraintLayout layoutMain;
 
-    @BindView(R.id.layoutMenu)
-    ConstraintLayout layoutMenu;
+    @BindView(R.id.layoutMenu) ConstraintLayout layoutMenu;
 
-    @BindView(R.id.layoutAdd)
-    ConstraintLayout layoutAdd;
+    @BindView(R.id.layoutAdd) ConstraintLayout layoutAdd;
 
-    @BindView(R.id.tv_re_time_set)
-    TextView tvReTimeSet;
+    @BindView(R.id.calendarView) CalendarView calendarView;
 
-    @BindView(R.id.tv_modify_category)
-    TextView tvModifyCategory;
-
-    @BindView(R.id.tv_add_schedule)
-    TextView tvAddSchedule;
-
-    @BindView(R.id.calendarView)
-    CalendarView calendarView;
-
-    @BindView(R.id.tv_today)
-    TextView tvToday;
-
-    @BindView(R.id.tv_add_fixed_schedule)
-    TextView tvAddFixedSchedule;
-
-    @Inject
-    MainContract.Presenter presenter;
+    @Inject MainViewModel viewModel;
 
     private boolean isOpen = false;
 
@@ -101,41 +71,57 @@ public class MainActivity extends BaseActivityMVP implements CalendarView.OnCale
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        presenter.createView(this);
-        presenter.getCalendarBook();
+        binding.setViewModel(viewModel);
+    }
 
-        tvReTimeSet.setOnClickListener(v -> startActivity(new Intent(this, ReTimeSetActivity.class)));
+    @Override
+    public int getLayoutResourceId() {
+        return R.layout.activity_main;
+    }
 
-        tvModifyCategory.setOnClickListener(v -> startActivity(new Intent(this, CategoryActivity.class)));
+    @Override
+    public void viewInit() {
+        findViewById(R.id.tv_re_time_set).setOnClickListener(v -> startActivity(new Intent(this, ReTimeSetActivity.class)));
 
-        tvAddSchedule.setOnClickListener(v -> startActivity(new Intent(this, AddScheduleActivity.class)));
+        findViewById(R.id.tv_modify_category).setOnClickListener(v -> startActivity(new Intent(this, CategoryActivity.class)));
 
-        tvAddFixedSchedule.setOnClickListener(v -> startActivity(new Intent(this, AddFixedScheduleActivity.class)));
+        findViewById(R.id.tv_add_schedule).setOnClickListener(v -> startActivity(new Intent(this, AddScheduleActivity.class)));
+
+        findViewById(R.id.tv_add_fixed_schedule).setOnClickListener(v -> startActivity(new Intent(this, AddFixedScheduleActivity.class)));
 
         findViewById(R.id.tv_logout).setOnClickListener(v -> new LogoutDialog().show(getSupportFragmentManager(), ""));
 
-        findViewById(R.id.iv_left).setOnClickListener(v -> calendarView.scrollToPre());
+        findViewById(R.id.iv_left).setOnClickListener(v -> calendarView.scrollToPre(true));
 
-        findViewById(R.id.iv_right).setOnClickListener(v -> calendarView.scrollToNext());
+        findViewById(R.id.iv_right).setOnClickListener(v -> calendarView.scrollToNext(true));
 
         rvSchedule.setAdapter(adapter);
 
         ((TextView) findViewById(R.id.tv_calendar_month)).setText(new DateFormatSymbols().getMonths()[calendarView.getCurMonth() - 1]);
 
-        presenter.getCalendarSchedule(new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(new Date(System.currentTimeMillis())));
+        calendarView.setOnCalendarSelectListener(new CalendarView.OnCalendarSelectListener() {
+            @Override
+            public void onCalendarOutOfRange(Calendar calendar) {
+            }
 
-        calendarView.setOnCalendarSelectListener(this);
+            @Override
+            public void onCalendarSelect(Calendar calendar, boolean isClick) {
+                viewModel.selectedDate.setValue(TimeUtil.formatToFullDate(calendar.getYear(), calendar.getMonth(), calendar.getDay()));
+            }
+        });
+
+        viewModel.selectedDate.setValue(TimeUtil.formatToFullDate(calendarView.getCurYear(), calendarView.getCurMonth(), calendarView.getCurDay()));
+
+        viewModel.getCalendarBook();
     }
 
-    private Calendar getSchemeCalendar(int year, int month, int day, int color) {
-        Calendar calendar = new Calendar();
-        calendar.setYear(year);
-        calendar.setMonth(month);
-        calendar.setDay(day);
-        calendar.setSchemeColor(color);
-        return calendar;
+    @Override
+    public void observeViewModel() {
+        viewModel.calendarSchedule.observe(this, calendarSchedules -> adapter.setItems(calendarSchedules));
+
+        viewModel.selectedDate.observe(this, date -> viewModel.getCalendarSchedule());
+
+        viewModel.getToastEvent().observe(this, stringId -> Toast.makeText(this, stringId, Toast.LENGTH_SHORT).show());
     }
 
     public void viewMenu(View view) {
@@ -247,68 +233,5 @@ public class MainActivity extends BaseActivityMVP implements CalendarView.OnCale
     protected void onDestroy() {
         backSubjectDisposable.dispose();
         super.onDestroy();
-    }
-
-    @Override
-    public void onCalendarOutOfRange(Calendar calendar) {
-    }
-
-    @SuppressLint("SetTextI18n")
-    @Override
-    public void onCalendarSelect(Calendar calendar, boolean isClick) {
-        ((TextView) findViewById(R.id.tv_calendar_month)).setText(new DateFormatSymbols().getMonths()[calendar.getMonth() - 1]);
-        tvToday.setText(calendar.getMonth() + " " + calendar.getDay());
-        String date = calendar.getYear() + "-" + calendar.getMonth() + "-" + calendar.getDay();
-        try {
-            Date tempDate = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).parse(date);
-            assert tempDate != null;
-            date = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(tempDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        presenter.getCalendarSchedule(date);
-    }
-
-    @Override
-    public void toastServerError() {
-        Toast.makeText(this, R.string.error_server_error, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void setCalendarBook(List<CalendarBook> calendarBook) {
-        Map<String, Calendar> result = new HashMap<>();
-
-        for (CalendarBook calendar : calendarBook) {
-            String calendarDate = calendar.getDate();
-            String year = calendarDate.split("-")[0];
-            String month = calendarDate.split("-")[1];
-            String date = calendarDate.split("-")[2];
-
-            int color = 0;
-            switch (calendar.getCategory()) {
-                case "purple":
-                    color = 0xFF7247B2;
-                    break;
-                case "blue":
-                    color = 0xFF3CB8EF;
-                    break;
-                case "pink":
-                    color = 0xFFD92D73;
-                    break;
-                case "orange":
-                    color = 0xFFFAA86B;
-                    break;
-            }
-            Calendar mapValue = getSchemeCalendar(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(date), color);
-            result.put(mapValue.toString(), mapValue);
-        }
-
-        calendarView.setSchemeDate(result);
-    }
-
-    @Override
-    public void setCalendarSchedule(List<CalendarSchedule> calendarSchedule) {
-        adapter.setItems(calendarSchedule);
     }
 }

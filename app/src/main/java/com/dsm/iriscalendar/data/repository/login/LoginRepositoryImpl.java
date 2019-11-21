@@ -31,12 +31,10 @@ public class LoginRepositoryImpl implements LoginRepository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(it -> {
-                    if (it.code() == 200) {
-                        if (it.body() != null) {
-                            AuthResponse response = it.body();
-                            prefHelper.saveToken(response.getToken());
-                            prefHelper.saveUuid(response.getUuid());
-                        }
+                    if (it.code() == 200 && it.body() != null) {
+                        AuthResponse response = it.body();
+                        prefHelper.saveToken(response.getToken());
+                        prefHelper.saveUuid(response.getUuid());
                     }
                 })
                 .map(Response::code);

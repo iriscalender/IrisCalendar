@@ -1,0 +1,14 @@
+package com.dsm.iriscalendar.data.repository.main;
+
+import com.dsm.iriscalendar.data.model.CalendarBook;
+import com.dsm.iriscalendar.data.model.CalendarSchedule;
+
+import java.util.List;
+
+import io.reactivex.Flowable;
+
+public interface MainRepository {
+    Flowable<List<CalendarBook>> getCalendarBook();
+
+    Flowable<List<CalendarSchedule>> getCalendarSchedule(String date);
+}

@@ -28,7 +28,7 @@ public class NetworkModule {
     @Singleton
     Api provideApi(OkHttpClient client) {
         return new Retrofit.Builder()
-                .baseUrl("http://192.168.137.43:1234/")
+                .baseUrl("http://192.168.0.10:1234/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)

@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
+import butterknife.ButterKnife;
 import dagger.android.support.DaggerAppCompatActivity;
 
 public abstract class BaseActivity<T extends ViewDataBinding> extends DaggerAppCompatActivity {
@@ -23,6 +24,8 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends DaggerAppC
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, getLayoutResourceId());
         binding.setLifecycleOwner(this);
+
+        ButterKnife.bind(this);
 
         viewInit();
         observeViewModel();

@@ -12,4 +12,9 @@ public class CalendarBook {
     public String getDate() {
         return date;
     }
+
+    public CalendarBook(String category, String date) {
+        this.category = category;
+        this.date = date;
+    }
 }

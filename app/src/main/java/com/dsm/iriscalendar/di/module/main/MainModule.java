@@ -1,10 +1,10 @@
 package com.dsm.iriscalendar.di.module.main;
 
 import com.dsm.iriscalendar.data.Api;
+import com.dsm.iriscalendar.data.repository.main.MainRepository;
+import com.dsm.iriscalendar.data.repository.main.MainRepositoryImpl;
 import com.dsm.iriscalendar.di.scope.MainActivityScope;
-import com.dsm.iriscalendar.ui.main.MainContract;
-import com.dsm.iriscalendar.ui.main.MainPresenter;
-import com.dsm.iriscalendar.ui.main.MainRepository;
+import com.dsm.iriscalendar.ui.main.MainViewModel;
 
 import dagger.Module;
 import dagger.Provides;
@@ -14,13 +14,13 @@ public class MainModule {
 
     @Provides
     @MainActivityScope
-    MainContract.Repository provideMainRepository(Api api) {
-        return new MainRepository(api);
+    MainRepository provideMainRepository(Api api) {
+        return new MainRepositoryImpl(api);
     }
 
     @Provides
     @MainActivityScope
-    MainContract.Presenter provideMainPresenter(MainContract.Repository repository) {
-        return new MainPresenter(repository);
+    MainViewModel provideMainPresenter(MainRepository repository) {
+        return new MainViewModel(repository);
     }
 }
