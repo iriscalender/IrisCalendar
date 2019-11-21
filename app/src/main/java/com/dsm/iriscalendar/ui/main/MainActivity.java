@@ -95,9 +95,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
         findViewById(R.id.iv_right).setOnClickListener(v -> calendarView.scrollToNext(true));
 
-        rvSchedule.setAdapter(adapter);
-
         ((TextView) findViewById(R.id.tv_calendar_month)).setText(new DateFormatSymbols().getMonths()[calendarView.getCurMonth() - 1]);
+
+        rvSchedule.setAdapter(adapter);
 
         calendarView.setOnCalendarSelectListener(new CalendarView.OnCalendarSelectListener() {
             @Override
@@ -150,7 +150,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             anim.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animator) {
-
                 }
 
                 @Override
@@ -160,12 +159,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
                 @Override
                 public void onAnimationCancel(Animator animator) {
-
                 }
 
                 @Override
                 public void onAnimationRepeat(Animator animator) {
-
                 }
             });
             anim.setDuration(500);
@@ -203,7 +200,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             anim.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animator) {
-
                 }
 
                 @Override
@@ -213,12 +209,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
                 @Override
                 public void onAnimationCancel(Animator animator) {
-
                 }
 
                 @Override
                 public void onAnimationRepeat(Animator animator) {
-
                 }
             });
             anim.setDuration(500);
