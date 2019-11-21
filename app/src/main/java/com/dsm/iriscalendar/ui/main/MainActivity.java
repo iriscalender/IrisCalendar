@@ -20,7 +20,7 @@ import com.dsm.iriscalendar.ui.addSchedule.AddScheduleActivity;
 import com.dsm.iriscalendar.ui.category.CategoryActivity;
 import com.dsm.iriscalendar.ui.dialog.LogoutDialog;
 import com.dsm.iriscalendar.ui.reTimeSet.ReTimeSetActivity;
-import com.dsm.iriscalendar.util.TimeUtil;
+import com.dsm.iriscalendar.util.DateUtil;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
 
@@ -106,11 +106,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
             @Override
             public void onCalendarSelect(Calendar calendar, boolean isClick) {
-                viewModel.selectedDate.setValue(TimeUtil.formatToFullDate(calendar.getYear(), calendar.getMonth(), calendar.getDay()));
+                viewModel.selectedDate.setValue(DateUtil.formatToFullDate(calendar.getYear(), calendar.getMonth(), calendar.getDay()));
             }
         });
 
-        viewModel.selectedDate.setValue(TimeUtil.formatToFullDate(calendarView.getCurYear(), calendarView.getCurMonth(), calendarView.getCurDay()));
+        viewModel.selectedDate.setValue(DateUtil.formatToFullDate(calendarView.getCurYear(), calendarView.getCurMonth(), calendarView.getCurDay()));
 
         viewModel.getCalendarBook();
     }

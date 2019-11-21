@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Objects;
 
-public class TimeUtil {
+public class DateUtil {
     private static SimpleDateFormat fullDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
 
     public static String formatToFullDate(int year, int month, int date) {
