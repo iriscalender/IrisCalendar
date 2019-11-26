@@ -34,7 +34,6 @@ public class LoginRepositoryImpl implements LoginRepository {
                     if (it.code() == 200 && it.body() != null) {
                         AuthResponse response = it.body();
                         prefHelper.saveToken(response.getToken());
-                        prefHelper.saveUuid(response.getUuid());
                     }
                 })
                 .map(Response::code);

@@ -107,6 +107,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             @Override
             public void onCalendarSelect(Calendar calendar, boolean isClick) {
                 viewModel.selectedDate.setValue(DateUtil.formatToFullDate(calendar.getYear(), calendar.getMonth(), calendar.getDay()));
+                ((TextView) findViewById(R.id.tv_calendar_month)).setText(new DateFormatSymbols().getMonths()[calendar.getMonth() - 1]);
             }
         });
 

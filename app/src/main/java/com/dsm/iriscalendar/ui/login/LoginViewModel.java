@@ -1,5 +1,7 @@
 package com.dsm.iriscalendar.ui.login;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -8,6 +10,8 @@ import com.dsm.iriscalendar.R;
 import com.dsm.iriscalendar.base.BaseViewModel;
 import com.dsm.iriscalendar.data.repository.login.LoginRepository;
 import com.dsm.iriscalendar.util.SingleLiveEvent;
+
+import java.util.Objects;
 
 public class LoginViewModel extends BaseViewModel {
 
@@ -77,9 +81,13 @@ public class LoginViewModel extends BaseViewModel {
                                     toastEvent.setValue(R.string.error_invalid_value);
                                     break;
                                 default:
+                                    Log.d("DEBUGLOG", code.toString());
                                     toastEvent.setValue(R.string.error_server_error);
                             }
-                        }, throwable -> toastEvent.setValue(R.string.error_server_error))
+                        }, throwable -> {
+                            toastEvent.setValue(R.string.error_server_error);
+                            Log.d("DEBUGLOG", Objects.requireNonNull(throwable.getMessage()));
+                        })
         );
     }
 }

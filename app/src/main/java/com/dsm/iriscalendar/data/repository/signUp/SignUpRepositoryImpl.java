@@ -34,7 +34,6 @@ public class SignUpRepositoryImpl implements SignUpRepository {
                 .doOnNext(response -> {
                     if (response.code() == 200 && response.body() != null) {
                         AuthResponse body = response.body();
-                        prefHelper.saveUuid(body.getUuid());
                         prefHelper.saveToken(body.getToken());
                     }
                 })

@@ -52,6 +52,7 @@ dependencies {
     testImplementation testDependencies.mockitoInline
     testImplementation testDependencies.liveDataTesting
     testImplementation testDependencies.coreTesting
+    androidTestImplementation testDependencies.mockWebServer
 
     // butterKnife
     implementation dependencies.butterknife

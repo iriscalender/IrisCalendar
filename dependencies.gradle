@@ -53,6 +53,7 @@ ext {
             mockitoCore: "org.mockito:mockito-core:$mockitoCoreVersion",
             mockitoInline: "org.mockito:mockito-inline:$mockitoInlineVersion",
             liveDataTesting: "com.jraska.livedata:testing:$liveDataTestingVersion",
-            coreTesting: "android.arch.core:core-testing:$coreTestingVersion"
+            coreTesting: "android.arch.core:core-testing:$coreTestingVersion",
+            mockWebServer: "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
     ]
 }

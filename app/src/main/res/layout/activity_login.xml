@@ -85,7 +85,8 @@
             app:layout_constraintLeft_toLeftOf="@id/et_id"
             app:layout_constraintRight_toRightOf="@id/guideline2"
             app:layout_constraintTop_toTopOf="@id/iv_lock"
-            android:text="@={viewModel.password}"/>
+            android:text="@={viewModel.password}"
+            android:inputType="textPassword"/>
 
         <View
             android:id="@+id/line2"

@@ -1,5 +1,7 @@
 package com.dsm.iriscalendar.ui.main;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -11,6 +13,7 @@ import com.dsm.iriscalendar.data.repository.main.MainRepository;
 import com.dsm.iriscalendar.util.SingleLiveEvent;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MainViewModel extends BaseViewModel {
 
@@ -34,7 +37,10 @@ public class MainViewModel extends BaseViewModel {
                 repository.getCalendarBook()
                         .subscribe(
                                 response -> calendarBook.setValue(response),
-                                throwable -> toastEvent.setValue(R.string.error_server_error)
+                                throwable -> {
+                                    toastEvent.setValue(R.string.error_server_error);
+                                    Log.d("DEBUGLOG", "getCalendarBook" + Objects.requireNonNull(throwable.getMessage()));
+                                }
                         )
         );
     }
@@ -44,7 +50,10 @@ public class MainViewModel extends BaseViewModel {
                 repository.getCalendarSchedule(selectedDate.getValue())
                     .subscribe(
                             response -> calendarSchedule.setValue(response),
-                            throwable -> toastEvent.setValue(R.string.error_server_error)
+                            throwable -> {
+                                toastEvent.setValue(R.string.error_server_error);
+                                Log.d("DEBUGLOG", "getCalendarSchedule" + Objects.requireNonNull(throwable.getMessage()));
+                            }
                     )
         );
     }
