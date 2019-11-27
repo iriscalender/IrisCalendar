@@ -27,6 +27,16 @@ public class SignUpViewModel extends BaseViewModel {
         return intentMainEvent;
     }
 
+    private SingleLiveEvent<Void> showLoadingEvent = new SingleLiveEvent<>();
+    public LiveData<Void> getShowLoadingEvent() {
+        return showLoadingEvent;
+    }
+
+    private SingleLiveEvent<Void> hideLoadingEvent = new SingleLiveEvent<>();
+    public SingleLiveEvent<Void> getHideLoadingEvent() {
+        return hideLoadingEvent;
+    }
+
     private SignUpRepository signUpRepository;
 
     public SignUpViewModel(SignUpRepository signUpRepository) {
@@ -68,6 +78,8 @@ public class SignUpViewModel extends BaseViewModel {
 
         addDisposable(
                 signUpRepository.signUp(id, password, reType)
+                        .doOnSubscribe(t -> showLoadingEvent.call())
+                        .doOnTerminate(() -> hideLoadingEvent.call())
                         .subscribe(code -> {
                             switch (code) {
                                 case 200:

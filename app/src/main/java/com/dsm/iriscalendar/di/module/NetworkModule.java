@@ -28,7 +28,7 @@ public class NetworkModule {
     @Singleton
     Api provideApi(OkHttpClient client) {
         return new Retrofit.Builder()
-                .baseUrl("http://192.168.0.10:1234/")
+                .baseUrl("http://iriscalendar.ap-northeast-2.elasticbeanstalk.com/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)

@@ -1,5 +1,7 @@
 package com.dsm.iriscalendar.ui.reTimeSet;
 
+import android.util.Log;
+
 import com.dsm.iriscalendar.base.BasePresenter;
 
 public class ReTimeSetPresenter extends BasePresenter<ReTimeSetContract.View> implements ReTimeSetContract.Presenter {
@@ -16,7 +18,10 @@ public class ReTimeSetPresenter extends BasePresenter<ReTimeSetContract.View> im
                 repository.getTimeSet().subscribe(response -> {
                     view.setStartTime(response.getStartTime());
                     view.setEndTime(response.getEndTime());
-                }, throwable -> view.toastServerError())
+                }, throwable -> {
+                    view.toastServerError();
+                    Log.d("DEBUGLOG", "getTimeSet" + throwable.getMessage());
+                })
         );
     }
 
@@ -50,6 +55,7 @@ public class ReTimeSetPresenter extends BasePresenter<ReTimeSetContract.View> im
                             break;
                         default:
                             view.toastServerError();
+                            Log.d("DEBUGLOG", "timeSet" + response.code());
                     }
                 }, throwable -> view.toastServerError())
         );

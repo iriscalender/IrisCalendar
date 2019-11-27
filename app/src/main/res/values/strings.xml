@@ -65,4 +65,5 @@
     <string name="ask_logout">정말 진심으로 \n로그아웃 하시겠습니까?</string>
     <string name="yes">예</string>
     <string name="no">아니요</string>
+    <string name="loading">로딩중입니다…</string>
 </resources>

@@ -35,6 +35,14 @@ public class LoginViewModel extends BaseViewModel {
         return intentMainEvent;
     }
 
+    private SingleLiveEvent<Void> showLoadingEvent = new SingleLiveEvent<>();
+    public LiveData<Void> getShowLoadingEvent() {
+        return showLoadingEvent;
+    }
+
+    private SingleLiveEvent<Void> hideLoadingEvent = new SingleLiveEvent<>();
+    public LiveData<Void> getHideLoadingEvent() { return hideLoadingEvent; }
+
     private LoginRepository loginRepository;
 
     public LoginViewModel(LoginRepository loginRepository) {
@@ -71,6 +79,8 @@ public class LoginViewModel extends BaseViewModel {
 
         addDisposable(
                 loginRepository.login(id, password)
+                        .doOnSubscribe(t -> showLoadingEvent.call())
+                        .doOnTerminate(() -> hideLoadingEvent.call())
                         .subscribe(code -> {
                             switch (code) {
                                 case 200:

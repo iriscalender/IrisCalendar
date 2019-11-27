@@ -20,7 +20,7 @@ import retrofit2.http.Path;
 
 public interface Api {
 
-    @POST("auth/login")
+    @POST("auth/signin")
     Flowable<Response<AuthResponse>> login(@Body Object params);
 
     @POST("auth/signup")

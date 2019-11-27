@@ -9,6 +9,7 @@ import com.dsm.iriscalendar.base.BaseActivity;
 import com.dsm.iriscalendar.databinding.ActivityLoginBinding;
 import com.dsm.iriscalendar.ui.main.MainActivity;
 import com.dsm.iriscalendar.ui.signUp.SignUpActivity;
+import com.dsm.iriscalendar.util.LoadingDialog;
 
 import javax.inject.Inject;
 
@@ -39,5 +40,9 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
         viewModel.getIntentMainEvent().observe(this, t -> startActivity(new Intent(this, MainActivity.class)));
 
         viewModel.getFinishActivityEvent().observe(this, t -> finish());
+
+        viewModel.getShowLoadingEvent().observe(this, t -> LoadingDialog.show(getSupportFragmentManager()));
+
+        viewModel.getHideLoadingEvent().observe(this, t -> LoadingDialog.hide());
     }
 }

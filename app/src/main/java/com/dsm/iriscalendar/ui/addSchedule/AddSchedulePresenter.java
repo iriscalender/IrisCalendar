@@ -1,6 +1,10 @@
 package com.dsm.iriscalendar.ui.addSchedule;
 
+import android.util.Log;
+
 import com.dsm.iriscalendar.base.BasePresenter;
+
+import java.util.Objects;
 
 public class AddSchedulePresenter extends BasePresenter<AddScheduleContract.View> implements AddScheduleContract.Presenter {
 
@@ -37,9 +41,13 @@ public class AddSchedulePresenter extends BasePresenter<AddScheduleContract.View
                                     view.toastImpossibleSchedule();
                                     break;
                                 default:
+                                    Log.d("DEBUGLOG", "add schedule" + response.code());
                                     view.toastServerError();
                             }
-                        }, throwable -> view.toastServerError())
+                        }, throwable -> {
+                            view.toastServerError();
+                            Log.d("DEBUGLOG", "add Schedule" + Objects.requireNonNull(throwable.getMessage()));
+                        })
         );
     }
 

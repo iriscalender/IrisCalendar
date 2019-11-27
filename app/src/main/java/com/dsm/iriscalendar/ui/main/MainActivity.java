@@ -1,6 +1,7 @@
 package com.dsm.iriscalendar.ui.main;
 
 import android.animation.Animator;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -79,6 +80,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         return R.layout.activity_main;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void viewInit() {
         findViewById(R.id.tv_re_time_set).setOnClickListener(v -> startActivity(new Intent(this, ReTimeSetActivity.class)));
@@ -99,6 +101,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
         rvSchedule.setAdapter(adapter);
 
+        ((TextView) findViewById(R.id.tv_today)).setText(new DateFormatSymbols().getMonths()[calendarView.getCurMonth() - 1].substring(0, 3) + " " + calendarView.getCurDay());
+
         calendarView.setOnCalendarSelectListener(new CalendarView.OnCalendarSelectListener() {
             @Override
             public void onCalendarOutOfRange(Calendar calendar) {
@@ -108,6 +112,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             public void onCalendarSelect(Calendar calendar, boolean isClick) {
                 viewModel.selectedDate.setValue(DateUtil.formatToFullDate(calendar.getYear(), calendar.getMonth(), calendar.getDay()));
                 ((TextView) findViewById(R.id.tv_calendar_month)).setText(new DateFormatSymbols().getMonths()[calendar.getMonth() - 1]);
+                ((TextView) findViewById(R.id.tv_today)).setText(new DateFormatSymbols().getMonths()[calendar.getMonth() - 1].substring(0, 3) + " " + calendar.getDay());
             }
         });
 

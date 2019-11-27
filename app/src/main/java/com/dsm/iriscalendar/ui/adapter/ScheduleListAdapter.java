@@ -55,6 +55,20 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
             CalendarSchedule item = listItems.get(getAdapterPosition());
             tvTitle.setText(item.getCalendarName());
             tvTime.setText(item.getStartTime().split(" ")[1] + " " + item.getEndTime().split(" ")[1]);
+            switch (item.getCategory()) {
+                case "purple":
+                    viewCircle.setBackgroundResource(R.drawable.bg_circle_purple);
+                    break;
+                case "blue":
+                    viewCircle.setBackgroundResource(R.drawable.bg_round_blue);
+                    break;
+                case "pink":
+                    viewCircle.setBackgroundResource(R.drawable.bg_circle_red);
+                    break;
+                default:
+                    viewCircle.setBackgroundResource(R.drawable.bg_circle_orange);
+                    break;
+            }
             itemView.setOnClickListener(v -> {
                 Context context = itemView.getContext();
                 if (item.isAuto()) {
