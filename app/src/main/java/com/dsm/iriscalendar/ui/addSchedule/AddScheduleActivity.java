@@ -86,7 +86,7 @@ public class AddScheduleActivity extends BaseActivityMVP implements AddScheduleC
         String time = year + "-" + month + "-" + date;
 
         try {
-            return new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).parse(date)));
+            return new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).parse(time)));
         } catch (ParseException e) {
             e.printStackTrace();
         }

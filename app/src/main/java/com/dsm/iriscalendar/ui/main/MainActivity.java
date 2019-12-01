@@ -34,6 +34,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
+import kr.sdusb.libs.messagebus.MessageBus;
+import kr.sdusb.libs.messagebus.Subscribe;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
@@ -73,6 +75,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding.setViewModel(viewModel);
+        MessageBus.getInstance().register(this);
     }
 
     @Override
@@ -112,7 +115,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             public void onCalendarSelect(Calendar calendar, boolean isClick) {
                 viewModel.selectedDate.setValue(DateUtil.formatToFullDate(calendar.getYear(), calendar.getMonth(), calendar.getDay()));
                 ((TextView) findViewById(R.id.tv_calendar_month)).setText(new DateFormatSymbols().getMonths()[calendar.getMonth() - 1]);
-                ((TextView) findViewById(R.id.tv_today)).setText(new DateFormatSymbols().getMonths()[calendar.getMonth() - 1].substring(0, 3) + " " + calendar.getDay());
+                ((TextView) findViewById(R.id.tv_today)).setText(new DateFormatSymbols().getMonths()[calendar.getMonth() - 1] + " " + calendar.getDay() + "일");
             }
         });
 
@@ -229,9 +232,22 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         }
     }
 
+    @Subscribe(events = 0)
+    public void onAddSchedule() {
+        viewModel.getCalendarBook();
+        viewModel.getCalendarSchedule();
+    }
+
+    @Subscribe(events = 1)
+    public void onDeleteSchedule(int position) {
+        adapter.deletePosition(position);
+        viewModel.getCalendarBook();
+    }
+
     @Override
     protected void onDestroy() {
         backSubjectDisposable.dispose();
+        MessageBus.getInstance().unregister(this);
         super.onDestroy();
     }
 }

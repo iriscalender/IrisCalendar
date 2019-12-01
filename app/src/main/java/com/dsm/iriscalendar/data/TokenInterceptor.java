@@ -1,5 +1,7 @@
 package com.dsm.iriscalendar.data;
 
+import android.util.Log;
+
 import com.dsm.iriscalendar.data.local.PrefHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -21,6 +23,7 @@ public class TokenInterceptor implements Interceptor {
     @NotNull
     @Override
     public Response intercept(@NotNull Chain chain) throws IOException {
+        Log.d("DEBUGLOG", "token" + prefHelper.getToken());
         Request request = chain.request().newBuilder()
                 .addHeader("Authorization", prefHelper.getToken())
                 .build();

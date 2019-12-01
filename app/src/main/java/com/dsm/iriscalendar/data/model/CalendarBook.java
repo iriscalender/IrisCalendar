@@ -1,7 +1,10 @@
 package com.dsm.iriscalendar.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class CalendarBook {
 
+    @SerializedName("calendar")
     private String category;
     private String date;
 

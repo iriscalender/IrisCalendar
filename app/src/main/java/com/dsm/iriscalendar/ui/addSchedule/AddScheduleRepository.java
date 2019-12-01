@@ -1,5 +1,7 @@
 package com.dsm.iriscalendar.ui.addSchedule;
 
+import android.util.Log;
+
 import com.dsm.iriscalendar.data.Api;
 import com.dsm.iriscalendar.data.model.Category;
 import com.dsm.iriscalendar.data.model.Schedule;
@@ -25,10 +27,13 @@ public class AddScheduleRepository implements AddScheduleContract.Repository {
     public Flowable<Response<Schedule>> addSchedule(String category, String todo, String endTime, int requirementTime, boolean isParticularImportant) {
         Map<String, Object> params = new HashMap<>();
         params.put("category", category);
-        params.put("calenderName", todo);
+        params.put("calendarName", todo);
         params.put("endTime", endTime);
         params.put("requiredTime", requirementTime);
         params.put("isParticularImportant", isParticularImportant);
+
+        Log.d("DEBUGLOG", "add schedule param" + params.toString());
+
         return api.addSchedule(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());

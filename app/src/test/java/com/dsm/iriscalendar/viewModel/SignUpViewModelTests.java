@@ -92,7 +92,7 @@ public class SignUpViewModelTests extends BaseTest {
 
         viewModel.signUp();
 
-        TestObserver.test(viewModel.getIntentMainEvent()).assertHasValue();
+        TestObserver.test(viewModel.getIntentTimeSetEvent()).assertHasValue();
     }
 
     @Test

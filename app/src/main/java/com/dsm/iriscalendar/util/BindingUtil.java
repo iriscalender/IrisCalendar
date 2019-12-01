@@ -39,7 +39,7 @@ public class BindingUtil {
                     color = 0xFFFAA86B;
                     break;
             }
-            Calendar mapValue = getSchemeCalendar(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(date), color);
+            Calendar mapValue = getSchemeCalendar(Integer.valueOf(year.trim()), Integer.valueOf(month.trim()), Integer.valueOf(date.trim()), color);
             result.put(mapValue.toString(), mapValue);
         }
 

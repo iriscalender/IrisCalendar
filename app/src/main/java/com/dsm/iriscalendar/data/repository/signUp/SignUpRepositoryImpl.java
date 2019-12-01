@@ -32,7 +32,7 @@ public class SignUpRepositoryImpl implements SignUpRepository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(response -> {
-                    if (response.code() == 200 && response.body() != null) {
+                    if (response.code() == 201 && response.body() != null) {
                         AuthResponse body = response.body();
                         prefHelper.saveToken(body.getToken());
                     }

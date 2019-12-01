@@ -22,9 +22,9 @@ public class SignUpViewModel extends BaseViewModel {
         return toastEvent;
     }
 
-    private SingleLiveEvent<Void> intentMainEvent = new SingleLiveEvent<>();
-    public LiveData<Void> getIntentMainEvent() {
-        return intentMainEvent;
+    private SingleLiveEvent<Void> intentTimeSetEvent = new SingleLiveEvent<>();
+    public LiveData<Void> getIntentTimeSetEvent() {
+        return intentTimeSetEvent;
     }
 
     private SingleLiveEvent<Void> showLoadingEvent = new SingleLiveEvent<>();
@@ -82,8 +82,8 @@ public class SignUpViewModel extends BaseViewModel {
                         .doOnTerminate(() -> hideLoadingEvent.call())
                         .subscribe(code -> {
                             switch (code) {
-                                case 200:
-                                    intentMainEvent.call();
+                                case 201:
+                                    intentTimeSetEvent.call();
                                     break;
                                 case 400:
                                     toastEvent.setValue(R.string.error_invalid_value);

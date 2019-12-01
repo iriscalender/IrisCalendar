@@ -89,6 +89,10 @@ dependencies {
     implementation dependencies.lifecycleRuntime
     implementation dependencies.lifecycleExtensions
     implementation dependencies.lifecycleCommon
+
+    implementation 'com.github.UnsignedUSB:MessageBus:0.7.5'
+    annotationProcessor 'com.github.UnsignedUSB:MessageBus:0.7.5'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

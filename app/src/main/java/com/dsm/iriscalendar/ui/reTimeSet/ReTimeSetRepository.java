@@ -25,7 +25,7 @@ public class ReTimeSetRepository implements ReTimeSetContract.Repository {
 
     @Override
     public Flowable<TimeResponse> getTimeSet() {
-        return api.getTimeSet(prefHelper.getUuid())
+        return api.getTimeSet()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(response -> {
@@ -37,9 +37,9 @@ public class ReTimeSetRepository implements ReTimeSetContract.Repository {
     @Override
     public Flowable<Response<Object>> updateTimeSet(String startTime, String endTime) {
         Map<String, String> params = new HashMap<>();
-        params.put("startTime", startTime);
-        params.put("endTime", endTime);
-        return api.updateTimeSet(params, prefHelper.getUuid())
+        params.put("start", startTime);
+        params.put("end", endTime);
+        return api.updateTimeSet(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

@@ -6,6 +6,8 @@ import com.dsm.iriscalendar.base.BasePresenter;
 
 import java.util.Objects;
 
+import kr.sdusb.libs.messagebus.MessageBus;
+
 public class AddSchedulePresenter extends BasePresenter<AddScheduleContract.View> implements AddScheduleContract.Presenter {
 
     private AddScheduleContract.Repository repository;
@@ -27,12 +29,15 @@ public class AddSchedulePresenter extends BasePresenter<AddScheduleContract.View
             return;
         }
 
+        Log.d("DEBUGLOG", "category:" + category + "todo:" + todo + "end" + endTime);
+
         addDisposable(
                 repository.addSchedule(category, todo, endTime, requirementTime, isParticularImportant)
                         .subscribe(response -> {
                             switch (response.code()) {
-                                case 200:
+                                case 201:
                                     view.finishActivity();
+                                    MessageBus.getInstance().handle(0, null);
                                     break;
                                 case 400:
                                     view.toastInvalidValue();

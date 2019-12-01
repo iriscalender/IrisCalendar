@@ -41,7 +41,7 @@ public class ReTimeSetPresenterTests {
         presenter.getTimeSet();
 
         verify(view).setStartTime(response.getStartTime());
-        verify(view).setEndTime(response.getEndTime());
+        verify(view).setEndTime(response.getEnd());
     }
 
     @Test

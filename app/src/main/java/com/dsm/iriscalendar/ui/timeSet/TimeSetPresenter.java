@@ -20,14 +20,14 @@ public class TimeSetPresenter extends BasePresenter<TimeSetContract.View> implem
             return;
         }
 
-        int startTimeHour = Integer.parseInt(startTime.split(":")[0]);
-        int endTimeHour = Integer.parseInt(endTime.split(":")[0]);
-        int startTimeMinute = Integer.parseInt(startTime.split(":")[1]);
-        int endTimeMinute = Integer.parseInt(endTime.split(":")[1]);
-        if (startTimeHour > endTimeHour || ((startTimeHour == endTimeHour) && startTimeMinute > endTimeMinute)) {
-            view.toastStartTimeFast();
-            return;
-        }
+//        int startTimeHour = Integer.parseInt(startTime.split(":")[0]);
+//        int endTimeHour = Integer.parseInt(endTime.split(":")[0]);
+//        int startTimeMinute = Integer.parseInt(startTime.split(":")[1]);
+//        int endTimeMinute = Integer.parseInt(endTime.split(":")[1]);
+//        if (startTimeHour > endTimeHour || ((startTimeHour == endTimeHour) && startTimeMinute > endTimeMinute)) {
+//            view.toastStartTimeFast();
+//            return;
+//        }
 
         addDisposable(
                 repository.timeSet(startTime, endTime).subscribe(response -> {

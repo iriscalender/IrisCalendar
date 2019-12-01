@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.dsm.iriscalendar.R;
 import com.dsm.iriscalendar.base.BaseViewModel;
 import com.dsm.iriscalendar.data.model.CalendarBook;
-import com.dsm.iriscalendar.data.model.CalendarSchedule;
+import com.dsm.iriscalendar.data.model.MappedCalendarSchedule;
 import com.dsm.iriscalendar.data.repository.main.MainRepository;
 import com.dsm.iriscalendar.util.SingleLiveEvent;
 
@@ -19,7 +19,7 @@ public class MainViewModel extends BaseViewModel {
 
     public MutableLiveData<String> selectedDate = new MutableLiveData<>();
     public MutableLiveData<List<CalendarBook>> calendarBook = new MutableLiveData<>();
-    public MutableLiveData<List<CalendarSchedule>> calendarSchedule = new MutableLiveData<>();
+    public MutableLiveData<List<MappedCalendarSchedule>> calendarSchedule = new MutableLiveData<>();
 
     private SingleLiveEvent<Integer> toastEvent = new SingleLiveEvent<>();
     public LiveData<Integer> getToastEvent() {

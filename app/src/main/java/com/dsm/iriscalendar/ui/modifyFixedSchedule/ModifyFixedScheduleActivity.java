@@ -27,6 +27,8 @@ public class ModifyFixedScheduleActivity extends BaseActivityMVP implements Modi
         presenter.createView(this);
 
         presenter.getCategory();
+
+        findViewById(R.id.tv_cancel).setOnClickListener(v -> finish());
     }
 
     @Override

@@ -1,18 +1,18 @@
 package com.dsm.iriscalendar.data;
 
 import com.dsm.iriscalendar.data.model.AuthResponse;
-import com.dsm.iriscalendar.data.model.CalendarBook;
+import com.dsm.iriscalendar.data.model.CalendarBookList;
 import com.dsm.iriscalendar.data.model.CalendarSchedule;
 import com.dsm.iriscalendar.data.model.Category;
 import com.dsm.iriscalendar.data.model.FixedSchedule;
 import com.dsm.iriscalendar.data.model.Schedule;
+import com.dsm.iriscalendar.data.model.ScheduleResponse;
 import com.dsm.iriscalendar.data.model.TimeResponse;
-
-import java.util.List;
 
 import io.reactivex.Flowable;
 import retrofit2.Response;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -29,11 +29,11 @@ public interface Api {
     @POST("time")
     Flowable<Response<Object>> timeSet(@Body Object params);
 
-    @GET("time/{uuid}")
-    Flowable<Response<TimeResponse>> getTimeSet(@Path("uuid") String uuid);
+    @GET("time")
+    Flowable<Response<TimeResponse>> getTimeSet();
 
-    @PATCH("time/{uuid}")
-    Flowable<Response<Object>> updateTimeSet(@Body Object params, @Path("uuid") String uuid);
+    @PATCH("time")
+    Flowable<Response<Object>> updateTimeSet(@Body Object params);
 
     @GET("category")
     Flowable<Response<Category>> getCategory();
@@ -48,10 +48,10 @@ public interface Api {
     Flowable<Response<FixedSchedule>> addFixedSchedule(@Body Object params);
 
     @GET("calendar/book")
-    Flowable<List<CalendarBook>> getCalendarBook();
+    Flowable<CalendarBookList> getCalendarBook();
 
     @GET("calendar/{date}")
-    Flowable<List<CalendarSchedule>> getCalendarSchedule(@Path("date") String date);
+    Flowable<ScheduleResponse> getCalendarSchedule(@Path("date") String date);
 
     @GET("calendar/manual/{id}")
     Flowable<CalendarSchedule> getSchedule(@Path("id") int id);
@@ -61,4 +61,10 @@ public interface Api {
             @Path("id") int id,
             @Body Object params
     );
+
+    @DELETE("/calendar/auto/{id}")
+    Flowable<Response<Void>> completeAuto(@Path("id") int id);
+
+    @DELETE("/calendar/manual/{id}")
+    Flowable<Response<Void>> completeManual(@Path("id") int id);
 }

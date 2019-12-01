@@ -7,7 +7,7 @@ import android.widget.Toast;
 import com.dsm.iriscalendar.R;
 import com.dsm.iriscalendar.base.BaseActivity;
 import com.dsm.iriscalendar.databinding.ActivitySignUpBinding;
-import com.dsm.iriscalendar.ui.main.MainActivity;
+import com.dsm.iriscalendar.ui.timeSet.TimeSetActivity;
 import com.dsm.iriscalendar.util.LoadingDialog;
 
 import javax.inject.Inject;
@@ -33,8 +33,8 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding> {
 
     @Override
     public void observeViewModel() {
-        viewModel.getIntentMainEvent().observe(this, t -> {
-            Intent intent = new Intent(this, MainActivity.class);
+        viewModel.getIntentTimeSetEvent().observe(this, t -> {
+            Intent intent = new Intent(this, TimeSetActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         });
