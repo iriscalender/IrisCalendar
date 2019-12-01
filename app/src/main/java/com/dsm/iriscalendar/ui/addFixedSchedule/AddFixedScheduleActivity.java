@@ -1,16 +1,15 @@
 package com.dsm.iriscalendar.ui.addFixedSchedule;
 
 import android.os.Bundle;
-import android.view.View;
-import android.view.animation.Animation;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dsm.iriscalendar.R;
-import com.dsm.iriscalendar.base.BaseActivity;
+import com.dsm.iriscalendar.base.BaseActivityMVP;
 import com.dsm.iriscalendar.data.model.Category;
+import com.dsm.iriscalendar.ui.custom.CategoryView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,73 +18,39 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
-import butterknife.BindAnim;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddFixedScheduleActivity extends BaseActivity implements AddFixedScheduleContract.View {
+public class AddFixedScheduleActivity extends BaseActivityMVP implements AddFixedScheduleContract.View {
 
-    @BindAnim(R.anim.anim_big)
-    Animation animBig;
+    @BindView(R.id.np_hour) NumberPicker npHour;
 
-    @BindAnim(R.anim.anim_small)
-    Animation animSmall;
+    @BindView(R.id.np_minute) NumberPicker npMinute;
 
-    @BindView(R.id.view_first)
-    View viewFirst;
+    @BindView(R.id.tv_set_start) TextView tvSetStart;
 
-    @BindView(R.id.view_second)
-    View viewSecond;
+    @BindView(R.id.tv_set_end) TextView tvSetEnd;
 
-    @BindView(R.id.view_third)
-    View viewThird;
+    @BindView(R.id.tv_start_hour) TextView tvStartHour;
 
-    @BindView(R.id.view_fourth)
-    View viewFourth;
+    @BindView(R.id.tv_start_minute) TextView tvStartMinute;
 
-    @BindView(R.id.np_hour)
-    NumberPicker npHour;
+    @BindView(R.id.tv_end_hour) TextView tvEndHour;
 
-    @BindView(R.id.np_minute)
-    NumberPicker npMinute;
+    @BindView(R.id.tv_end_minute) TextView tvEndMinute;
 
-    @BindView(R.id.tv_set_start)
-    TextView tvSetStart;
+    @BindView(R.id.et_todo) EditText etTodo;
 
-    @BindView(R.id.tv_set_end)
-    TextView tvSetEnd;
+    @BindView(R.id.et_year) EditText etYear;
 
-    @BindView(R.id.tv_start_hour)
-    TextView tvStartHour;
+    @BindView(R.id.et_month) EditText etMonth;
 
-    @BindView(R.id.tv_start_minute)
-    TextView tvStartMinute;
+    @BindView(R.id.et_date) EditText etDate;
 
-    @BindView(R.id.tv_end_hour)
-    TextView tvEndHour;
+    @BindView(R.id.cv_add_fixed_schedule) CategoryView cvAddFixedSchedule;
 
-    @BindView(R.id.tv_end_minute)
-    TextView tvEndMinute;
+    @Inject AddFixedScheduleContract.Presenter presenter;
 
-    @BindView(R.id.et_todo)
-    EditText etTodo;
-
-    @BindView(R.id.et_year)
-    EditText etYear;
-
-    @BindView(R.id.et_month)
-    EditText etMonth;
-
-    @BindView(R.id.et_date)
-    EditText etDate;
-
-    @BindView(R.id.tv_complete)
-    TextView tvComplete;
-
-    @Inject
-    AddFixedScheduleContract.Presenter presenter;
-
-    private int upState = R.id.view_first;
     private boolean isStart = true;
 
     @Override
@@ -96,9 +61,6 @@ public class AddFixedScheduleActivity extends BaseActivity implements AddFixedSc
         presenter.createView(this);
         presenter.getCategory();
 
-        animBig.setFillAfter(true);
-        viewFirst.startAnimation(animBig);
-
         npHour.setMinValue(0);
         npHour.setMaxValue(24);
 
@@ -107,7 +69,7 @@ public class AddFixedScheduleActivity extends BaseActivity implements AddFixedSc
 
         findViewById(R.id.tv_cancel).setOnClickListener(v -> finish());
 
-        tvComplete.setOnClickListener(v -> presenter.addFixedSchedule());
+        findViewById(R.id.tv_complete).setOnClickListener(v -> presenter.addFixedSchedule());
 
         tvSetStart.setOnClickListener(v -> {
             isStart = !isStart;
@@ -146,53 +108,9 @@ public class AddFixedScheduleActivity extends BaseActivity implements AddFixedSc
         });
     }
 
-    public void onClickCategory(View v) {
-        int clickedView = v.getId();
-
-        if (clickedView == upState) {
-            return;
-        }
-
-        switch (upState) {
-            case R.id.view_first:
-                viewFirst.startAnimation(animSmall);
-                break;
-            case R.id.view_second:
-                viewSecond.startAnimation(animSmall);
-                break;
-            case R.id.view_third:
-                viewThird.startAnimation(animSmall);
-                break;
-            case R.id.view_fourth:
-                viewFourth.startAnimation(animSmall);
-                break;
-        }
-
-        if (clickedView == R.id.view_first) {
-            viewFirst.startAnimation(animBig);
-            upState = R.id.view_first;
-        } else if (clickedView == R.id.view_second) {
-            viewSecond.startAnimation(animBig);
-            upState = R.id.view_second;
-        } else if (clickedView == R.id.view_third) {
-            viewThird.startAnimation(animBig);
-            upState = R.id.view_third;
-        } else if (clickedView == R.id.view_fourth) {
-            viewFourth.startAnimation(animBig);
-            upState = R.id.view_fourth;
-        }
-    }
-
     @Override
     public String getCategory() {
-        if (upState == R.id.view_first)
-            return "purple";
-        else if (upState == R.id.view_second)
-            return "blue";
-        else if (upState == R.id.view_third)
-            return "pink";
-        else
-            return "orange";
+        return cvAddFixedSchedule.getCategory();
     }
 
     @Override
@@ -236,10 +154,7 @@ public class AddFixedScheduleActivity extends BaseActivity implements AddFixedSc
 
     @Override
     public void setCategory(Category category) {
-        ((TextView) findViewById(R.id.tv_purple)).setText(category.getPurple());
-        ((TextView) findViewById(R.id.tv_blue)).setText(category.getBlue());
-        ((TextView) findViewById(R.id.tv_pink)).setText(category.getPink());
-        ((TextView) findViewById(R.id.tv_orange)).setText(category.getOrange());
+        cvAddFixedSchedule.setCategory(category);
     }
 
     @Override

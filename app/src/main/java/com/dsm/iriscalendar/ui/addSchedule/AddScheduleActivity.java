@@ -1,15 +1,14 @@
 package com.dsm.iriscalendar.ui.addSchedule;
 
 import android.os.Bundle;
-import android.view.View;
-import android.view.animation.Animation;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dsm.iriscalendar.R;
-import com.dsm.iriscalendar.base.BaseActivity;
+import com.dsm.iriscalendar.base.BaseActivityMVP;
 import com.dsm.iriscalendar.data.model.Category;
+import com.dsm.iriscalendar.ui.custom.CategoryView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,58 +17,25 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
-import butterknife.BindAnim;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddScheduleActivity extends BaseActivity implements AddScheduleContract.View {
+public class AddScheduleActivity extends BaseActivityMVP implements AddScheduleContract.View {
 
-    @BindView(R.id.tv_category)
-    TextView tvCategory;
+    @BindView(R.id.et_todo) EditText etTodo;
 
-    @BindView(R.id.tv_cancel)
-    TextView tvCancel;
+    @BindView(R.id.et_year) EditText etYear;
 
-    @BindView(R.id.view_first)
-    View viewFirst;
+    @BindView(R.id.et_month) EditText etMonth;
 
-    @BindView(R.id.view_second)
-    View viewSecond;
+    @BindView(R.id.et_date) EditText etDate;
 
-    @BindView(R.id.view_third)
-    View viewThird;
+    @BindView(R.id.et_required_time) EditText etRequiredTime;
 
-    @BindView(R.id.view_fourth)
-    View viewFourth;
+    @BindView(R.id.tv_important) TextView tvImportant;
 
-    @BindAnim(R.anim.anim_big)
-    Animation animBig;
+    @BindView(R.id.cv_add_schedule) CategoryView cvAddSchedule;
 
-    @BindAnim(R.anim.anim_small)
-    Animation animSmall;
-
-    @BindView(R.id.et_todo)
-    EditText etTodo;
-
-    @BindView(R.id.et_year)
-    EditText etYear;
-
-    @BindView(R.id.et_month)
-    EditText etMonth;
-
-    @BindView(R.id.et_date)
-    EditText etDate;
-
-    @BindView(R.id.et_required_time)
-    EditText etRequiredTime;
-
-    @BindView(R.id.tv_important)
-    TextView tvImportant;
-
-    @BindView(R.id.tv_complete)
-    TextView tvComplete;
-
-    private int upState;
     private boolean isImportant = false;
 
     @Inject
@@ -81,13 +47,9 @@ public class AddScheduleActivity extends BaseActivity implements AddScheduleCont
         setContentView(R.layout.activity_add_schedule);
         ButterKnife.bind(this);
         presenter.createView(this);
-        animBig.setFillAfter(true);
         presenter.getCategory();
 
-        upState = R.id.view_first;
-        viewFirst.startAnimation(animBig);
-
-        tvCancel.setOnClickListener(v -> finish());
+        findViewById(R.id.tv_cancel).setOnClickListener(v -> finish());
 
         tvImportant.setOnClickListener(v -> {
             if (isImportant) {
@@ -101,56 +63,13 @@ public class AddScheduleActivity extends BaseActivity implements AddScheduleCont
             }
         });
 
-        tvComplete.setOnClickListener(v -> presenter.addSchedule());
+        findViewById(R.id.tv_complete).setOnClickListener(v -> presenter.addSchedule());
     }
 
-    public void onClickCategory(View v) {
-        int clickedView = v.getId();
-
-        if (clickedView == upState) {
-            return;
-        }
-
-        switch (upState) {
-            case R.id.view_first:
-                viewFirst.startAnimation(animSmall);
-                break;
-            case R.id.view_second:
-                viewSecond.startAnimation(animSmall);
-                break;
-            case R.id.view_third:
-                viewThird.startAnimation(animSmall);
-                break;
-            case R.id.view_fourth:
-                viewFourth.startAnimation(animSmall);
-                break;
-        }
-
-        if (clickedView == R.id.view_first) {
-            viewFirst.startAnimation(animBig);
-            upState = R.id.view_first;
-        } else if (clickedView == R.id.view_second) {
-            viewSecond.startAnimation(animBig);
-            upState = R.id.view_second;
-        } else if (clickedView == R.id.view_third) {
-            viewThird.startAnimation(animBig);
-            upState = R.id.view_third;
-        } else if (clickedView == R.id.view_fourth) {
-            viewFourth.startAnimation(animBig);
-            upState = R.id.view_fourth;
-        }
-    }
 
     @Override
     public String getCategory() {
-        if (upState == R.id.view_first)
-            return "purple";
-        else if (upState == R.id.view_second)
-            return "blue";
-        else if (upState == R.id.view_third)
-            return "pink";
-        else
-            return "orange";
+        return cvAddSchedule.getCategory();
     }
 
     @Override
@@ -167,7 +86,7 @@ public class AddScheduleActivity extends BaseActivity implements AddScheduleCont
         String time = year + "-" + month + "-" + date;
 
         try {
-            return new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).parse(date)));
+            return new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).parse(time)));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -215,9 +134,6 @@ public class AddScheduleActivity extends BaseActivity implements AddScheduleCont
 
     @Override
     public void setCategory(Category category) {
-        ((TextView) findViewById(R.id.tv_purple)).setText(category.getPurple());
-        ((TextView) findViewById(R.id.tv_blue)).setText(category.getBlue());
-        ((TextView) findViewById(R.id.tv_pink)).setText(category.getPink());
-        ((TextView) findViewById(R.id.tv_orange)).setText(category.getOrange());
+        cvAddSchedule.setCategory(category);
     }
 }

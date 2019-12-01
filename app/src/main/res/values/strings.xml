@@ -53,7 +53,7 @@
     <string name="error_short_id">아이디는 최소 6 글자입니다</string>
     <string name="error_short_password">비밀번호는 최소 8 글자입니다</string>
     <string name="error_server_error">서버 문제가 발생했습니다</string>
-    <string name="error_invalid_value">유효하지 않은 아이디 또는 비밀번호입니다</string>
+    <string name="error_invalid_value">유효하지 않은 값입니다</string>
     <string name="error_not_same_password">비밀번호가 일치하지 않습니다</string>
     <string name="error_user_already_exists">이미 존재하는 사용자입니다</string>
     <string name="error_start_time_faster">시작 시간이 더 빠릅니다</string>
@@ -65,4 +65,7 @@
     <string name="ask_logout">정말 진심으로 \n로그아웃 하시겠습니까?</string>
     <string name="yes">예</string>
     <string name="no">아니요</string>
+    <string name="loading">로딩중입니다…</string>
+    <string name="complete_schedule">일정 완료</string>
+    <string name="modify_schedule">일정 수정하기</string>
 </resources>

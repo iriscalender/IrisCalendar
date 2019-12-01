@@ -1,8 +1,7 @@
 package com.dsm.iriscalendar.ui.adapter;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dsm.iriscalendar.R;
-import com.dsm.iriscalendar.data.model.CalendarSchedule;
-import com.dsm.iriscalendar.ui.modifyFixedSchedule.ModifyFixedScheduleActivity;
-import com.dsm.iriscalendar.ui.modifySchedule.ModifyScheduleActivity;
+import com.dsm.iriscalendar.data.model.MappedCalendarSchedule;
+import com.dsm.iriscalendar.ui.dialog.ScheduleDialog;
+import com.dsm.iriscalendar.ui.main.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapter.ViewHolder> {
 
-    private List<CalendarSchedule> listItems = new ArrayList<>();
+    private List<MappedCalendarSchedule> listItems = new ArrayList<>();
 
     @NonNull
     @Override
@@ -52,26 +51,43 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
 
         @SuppressLint("SetTextI18n")
         private void bind() {
-            CalendarSchedule item = listItems.get(getAdapterPosition());
+            MappedCalendarSchedule item = listItems.get(getAdapterPosition());
             tvTitle.setText(item.getCalendarName());
             tvTime.setText(item.getStartTime().split(" ")[1] + " " + item.getEndTime().split(" ")[1]);
+            switch (item.getCategory()) {
+                case "purple":
+                    viewCircle.setBackgroundResource(R.drawable.bg_circle_purple);
+                    break;
+                case "blue":
+                    viewCircle.setBackgroundResource(R.drawable.bg_round_blue);
+                    break;
+                case "pink":
+                    viewCircle.setBackgroundResource(R.drawable.bg_circle_red);
+                    break;
+                default:
+                    viewCircle.setBackgroundResource(R.drawable.bg_circle_orange);
+                    break;
+            }
             itemView.setOnClickListener(v -> {
-                Context context = itemView.getContext();
-                if (item.isAuto()) {
-                    Intent intent = new Intent(context, ModifyScheduleActivity.class);
-                    intent.putExtra("id", item.getId());
-                    context.startActivity(intent);
-                } else {
-                    Intent intent = new Intent(context, ModifyFixedScheduleActivity.class);
-                    intent.putExtra("id", item.getId());
-                    context.startActivity(intent);
-                }
+                Bundle bundle = new Bundle();
+                bundle.putString("name", item.getCalendarName());
+                bundle.putInt("id", item.getId());
+                bundle.putBoolean("isAuto", item.isAuto());
+                bundle.putInt("position", getAdapterPosition());
+                ScheduleDialog dialog = new ScheduleDialog();
+                dialog.setArguments(bundle);
+                dialog.show(((MainActivity)itemView.getContext()).getSupportFragmentManager(), "");
             });
         }
     }
 
-    public void setItems(List<CalendarSchedule> items) {
+    public void setItems(List<MappedCalendarSchedule> items) {
         listItems = items;
         notifyDataSetChanged();
+    }
+
+    public void deletePosition(int position) {
+        listItems.remove(position);
+        notifyItemRemoved(position);
     }
 }

@@ -1,0 +1,59 @@
+ext {
+    // library
+    kotlinVersion = '1.3.41'
+    androidxVersion = '1.1.0'
+    butterknifeVersion = '10.1.0'
+    materialVersion = '1.1.0-beta01'
+    calendarViewVersion = '3.6.7'
+    constraintLayoutVersion = '1.1.3'
+    rxAndroidVersion = '2.1.1'
+    rxJavaVersion = '2.2.12'
+    firebaseCoreVersion = '17.2.1'
+    crashlyticsVersion = '2.10.1'
+    retrofitVersion = '2.6.1'
+    daggerVersion = '2.23.1'
+    lifecycleVersion = '2.1.0'
+    liveDataTestingVersion = '1.1.0'
+    okhttpVersion = '4.2.1'
+    coreTestingVersion = '1.1.1'
+
+    // test
+    junitVersion = '4.12'
+    mockitoCoreVersion = '3.1.0'
+    mockitoInlineVersion = '2.13.0'
+
+    dependencies = [
+            kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            appcompat: "androidx.appcompat:appcompat:$androidxVersion",
+            coreKtx: "androidx.core:core-ktx:$androidxVersion",
+            butterknife: "com.jakewharton:butterknife:$butterknifeVersion",
+            butterknifeCompiler: "com.jakewharton:butterknife-compiler:$butterknifeVersion",
+            material: "com.google.android.material:material:$materialVersion",
+            calendarView: "com.haibin:calendarview:$calendarViewVersion",
+            constraintLayout: "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            rxAndroid: "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
+            rxJava: "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
+            firebaseCore: "com.google.firebase:firebase-core:$firebaseCoreVersion",
+            crashlytics: "com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion",
+            retrofit: "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofitGson: "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+            retrofitRxJava: "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion",
+            dagger: "com.google.dagger:dagger:$daggerVersion",
+            daggerAndroid: "com.google.dagger:dagger-android-support:$daggerVersion",
+            daggerProcessor: "com.google.dagger:dagger-android-processor:$daggerVersion",
+            daggerCompiler: "com.google.dagger:dagger-compiler:$daggerVersion",
+            lifecycleRuntime: "androidx.lifecycle:lifecycle-runtime:$lifecycleVersion",
+            lifecycleExtensions: "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion",
+            lifecycleCommon: "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion",
+            okhttp: "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    ]
+
+    testDependencies = [
+            junit: "junit:junit:$junitVersion",
+            mockitoCore: "org.mockito:mockito-core:$mockitoCoreVersion",
+            mockitoInline: "org.mockito:mockito-inline:$mockitoInlineVersion",
+            liveDataTesting: "com.jraska.livedata:testing:$liveDataTestingVersion",
+            coreTesting: "android.arch.core:core-testing:$coreTestingVersion",
+            mockWebServer: "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
+    ]
+}

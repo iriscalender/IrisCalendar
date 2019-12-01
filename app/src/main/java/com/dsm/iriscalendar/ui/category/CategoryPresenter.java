@@ -1,5 +1,7 @@
 package com.dsm.iriscalendar.ui.category;
 
+import android.util.Log;
+
 import com.dsm.iriscalendar.base.BasePresenter;
 
 public class CategoryPresenter extends BasePresenter<CategoryContract.View> implements CategoryContract.Presenter {
@@ -15,7 +17,10 @@ public class CategoryPresenter extends BasePresenter<CategoryContract.View> impl
         addDisposable(
                 repository.getCategory().subscribe(
                         response -> view.setCategory(response),
-                        throwable -> view.toastServerError()
+                        throwable -> {
+                            view.toastServerError();
+                            Log.d("DEBUGLOG", throwable.getMessage());
+                        }
                 )
         );
     }

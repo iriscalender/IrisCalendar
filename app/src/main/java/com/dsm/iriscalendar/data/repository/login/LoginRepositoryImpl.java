@@ -1,4 +1,4 @@
-package com.dsm.iriscalendar.ui.login;
+package com.dsm.iriscalendar.data.repository.login;
 
 import com.dsm.iriscalendar.data.Api;
 import com.dsm.iriscalendar.data.local.PrefHelper;
@@ -12,18 +12,18 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
-public class LoginRepository implements LoginContract.Repository {
+public class LoginRepositoryImpl implements LoginRepository {
 
     private Api api;
     private PrefHelper prefHelper;
 
-    public LoginRepository(Api api, PrefHelper prefHelper) {
+    public LoginRepositoryImpl(Api api, PrefHelper prefHelper) {
         this.api = api;
         this.prefHelper = prefHelper;
     }
 
     @Override
-    public Flowable<Response<AuthResponse>> login(String id, String password) {
+    public Flowable<Integer> login(String id, String password) {
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
         params.put("password", password);
@@ -31,13 +31,11 @@ public class LoginRepository implements LoginContract.Repository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(it -> {
-                    if (it.code() == 200) {
-                        if (it.body() != null) {
-                            AuthResponse response = it.body();
-                            prefHelper.saveToken(response.getToken());
-                            prefHelper.saveUuid(response.getUuid());
-                        }
+                    if (it.code() == 200 && it.body() != null) {
+                        AuthResponse response = it.body();
+                        prefHelper.saveToken(response.getToken());
                     }
-                });
+                })
+                .map(Response::code);
     }
 }

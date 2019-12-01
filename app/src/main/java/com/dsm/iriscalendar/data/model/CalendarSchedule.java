@@ -7,7 +7,6 @@ public class CalendarSchedule {
     private String calendarName;
     private String startTime;
     private String endTime;
-    private boolean isAuto;
 
     public int getId() {
         return id;
@@ -29,7 +28,12 @@ public class CalendarSchedule {
         return endTime;
     }
 
-    public boolean isAuto() {
-        return isAuto;
+
+    public CalendarSchedule(int id, String category, String calendarName, String startTime, String endTime) {
+        this.id = id;
+        this.category = category;
+        this.calendarName = calendarName;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 }

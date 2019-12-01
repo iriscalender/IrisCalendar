@@ -1,5 +1,7 @@
 package com.dsm.iriscalendar.ui.timeSet;
 
+import android.util.Log;
+
 import com.dsm.iriscalendar.data.Api;
 
 import java.util.HashMap;
@@ -21,8 +23,9 @@ public class TimeSetRepository implements TimeSetContract.Repository {
     @Override
     public Flowable<Response<Object>> timeSet(String startTime, String endTime) {
         Map<String, String> params = new HashMap<>();
-        params.put("startTime", startTime);
-        params.put("endTime", endTime);
+        params.put("start", startTime);
+        params.put("end", endTime);
+        Log.d("DEBUGLOG", startTime + " " + endTime);
         return api.timeSet(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());

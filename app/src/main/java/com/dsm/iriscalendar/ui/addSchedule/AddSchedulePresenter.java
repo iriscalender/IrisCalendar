@@ -1,6 +1,12 @@
 package com.dsm.iriscalendar.ui.addSchedule;
 
+import android.util.Log;
+
 import com.dsm.iriscalendar.base.BasePresenter;
+
+import java.util.Objects;
+
+import kr.sdusb.libs.messagebus.MessageBus;
 
 public class AddSchedulePresenter extends BasePresenter<AddScheduleContract.View> implements AddScheduleContract.Presenter {
 
@@ -23,12 +29,15 @@ public class AddSchedulePresenter extends BasePresenter<AddScheduleContract.View
             return;
         }
 
+        Log.d("DEBUGLOG", "category:" + category + "todo:" + todo + "end" + endTime);
+
         addDisposable(
                 repository.addSchedule(category, todo, endTime, requirementTime, isParticularImportant)
                         .subscribe(response -> {
                             switch (response.code()) {
-                                case 200:
+                                case 201:
                                     view.finishActivity();
+                                    MessageBus.getInstance().handle(0, null);
                                     break;
                                 case 400:
                                     view.toastInvalidValue();
@@ -37,9 +46,13 @@ public class AddSchedulePresenter extends BasePresenter<AddScheduleContract.View
                                     view.toastImpossibleSchedule();
                                     break;
                                 default:
+                                    Log.d("DEBUGLOG", "add schedule" + response.code());
                                     view.toastServerError();
                             }
-                        }, throwable -> view.toastServerError())
+                        }, throwable -> {
+                            view.toastServerError();
+                            Log.d("DEBUGLOG", "add Schedule" + Objects.requireNonNull(throwable.getMessage()));
+                        })
         );
     }
 

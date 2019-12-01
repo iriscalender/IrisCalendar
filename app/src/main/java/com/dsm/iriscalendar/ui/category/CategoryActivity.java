@@ -16,7 +16,7 @@ import android.widget.ViewSwitcher;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.dsm.iriscalendar.R;
-import com.dsm.iriscalendar.base.BaseActivity;
+import com.dsm.iriscalendar.base.BaseActivityMVP;
 import com.dsm.iriscalendar.data.model.Category;
 
 import javax.inject.Inject;
@@ -24,7 +24,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CategoryActivity extends BaseActivity implements CategoryContract.View {
+public class CategoryActivity extends BaseActivityMVP implements CategoryContract.View {
 
     @BindView(R.id.tv_cancel)
     TextView tvCancel;

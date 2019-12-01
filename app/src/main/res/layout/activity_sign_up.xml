@@ -1,137 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.signUp.SignUpActivity">
+<layout>
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:background="@color/colorPrimaryLight"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="viewModel"
+            type="com.dsm.iriscalendar.ui.signUp.SignUpViewModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/tv_sign_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/sign_up"
-        android:textColor="@color/colorWhite"
-        android:textSize="22sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@drawable/bg_round_white"
-        android:id="@+id/content"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_sign_up"
-        android:elevation="10dp">
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_id"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="@string/id"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            app:layout_constraintBottom_toTopOf="@id/et_password"
-            app:layout_constraintLeft_toLeftOf="@id/content"
-            app:layout_constraintRight_toRightOf="@id/content"
-            app:layout_constraintTop_toTopOf="@id/content"
-            app:layout_constraintVertical_chainStyle="packed"
-            android:layout_marginBottom="60dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:nextFocusDown="@id/et_password"
-            android:maxLines="1"/>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.signUp.SignUpActivity">
 
         <View
             android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="6dp"
-            android:background="@color/colorSky"
-            app:layout_constraintLeft_toLeftOf="@id/et_id"
-            app:layout_constraintRight_toRightOf="@id/et_id"
-            app:layout_constraintTop_toBottomOf="@id/et_id" />
+            android:layout_height="120dp"
+            android:background="@color/colorPrimaryLight"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_password"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/tv_sign_up"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="@string/password"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            app:layout_constraintBottom_toTopOf="@id/et_password_confirm"
-            app:layout_constraintLeft_toLeftOf="@id/et_id"
-            app:layout_constraintRight_toRightOf="@id/et_id"
-            app:layout_constraintTop_toBottomOf="@id/et_id"
-            android:layout_marginBottom="60dp"
-            android:nextFocusDown="@id/et_password_confirm"
-            android:maxLines="1"
-            android:inputType="textPassword"/>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="6dp"
-            android:background="@color/colorSky"
-            app:layout_constraintLeft_toLeftOf="@id/et_password"
-            app:layout_constraintRight_toRightOf="@id/et_password"
-            app:layout_constraintTop_toBottomOf="@id/et_password" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_password_confirm"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="@string/password_confirm"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            app:layout_constraintBottom_toTopOf="@id/btn_sign_up"
-            app:layout_constraintLeft_toLeftOf="@id/et_id"
-            app:layout_constraintRight_toRightOf="@id/et_id"
-            app:layout_constraintTop_toBottomOf="@id/et_password"
-            android:layout_marginBottom="100dp"
-            android:maxLines="1"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"/>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="6dp"
-            android:background="@color/colorSky"
-            app:layout_constraintLeft_toLeftOf="@id/et_password_confirm"
-            app:layout_constraintRight_toRightOf="@id/et_password_confirm"
-            app:layout_constraintTop_toBottomOf="@id/et_password_confirm" />
-
-        <Button
-            android:id="@+id/btn_sign_up"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="@string/sign_up"
-            android:background="@drawable/bg_round_primary"
-            app:layout_constraintLeft_toLeftOf="@id/et_id"
-            app:layout_constraintRight_toRightOf="@id/et_id"
-            app:layout_constraintBottom_toBottomOf="@id/content"
-            android:layout_marginBottom="30dp"
             android:textColor="@color/colorWhite"
-            android:textStyle="bold" />
+            android:textSize="22sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="30dp"
+            android:background="@drawable/bg_round_white"
+            android:elevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_sign_up">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="60dp"
+                android:background="@null"
+                android:hint="@string/id"
+                android:maxLines="1"
+                android:nextFocusDown="@id/et_password"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintBottom_toTopOf="@id/et_password"
+                app:layout_constraintLeft_toLeftOf="@id/content"
+                app:layout_constraintRight_toRightOf="@id/content"
+                app:layout_constraintTop_toTopOf="@id/content"
+                app:layout_constraintVertical_chainStyle="packed"
+                android:text="@={viewModel.id}"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/colorSky"
+                app:layout_constraintLeft_toLeftOf="@id/et_id"
+                app:layout_constraintRight_toRightOf="@id/et_id"
+                app:layout_constraintTop_toBottomOf="@id/et_id" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="60dp"
+                android:background="@null"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:nextFocusDown="@id/et_password_confirm"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintBottom_toTopOf="@id/et_password_confirm"
+                app:layout_constraintLeft_toLeftOf="@id/et_id"
+                app:layout_constraintRight_toRightOf="@id/et_id"
+                app:layout_constraintTop_toBottomOf="@id/et_id"
+                android:text="@={viewModel.password}"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/colorSky"
+                app:layout_constraintLeft_toLeftOf="@id/et_password"
+                app:layout_constraintRight_toRightOf="@id/et_password"
+                app:layout_constraintTop_toBottomOf="@id/et_password" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_password_confirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:background="@null"
+                android:hint="@string/password_confirm"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintBottom_toTopOf="@id/btn_sign_up"
+                app:layout_constraintLeft_toLeftOf="@id/et_id"
+                app:layout_constraintRight_toRightOf="@id/et_id"
+                app:layout_constraintTop_toBottomOf="@id/et_password"
+                android:text="@={viewModel.reType}"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/colorSky"
+                app:layout_constraintLeft_toLeftOf="@id/et_password_confirm"
+                app:layout_constraintRight_toRightOf="@id/et_password_confirm"
+                app:layout_constraintTop_toBottomOf="@id/et_password_confirm" />
+
+            <Button
+                android:id="@+id/btn_sign_up"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:background="@{viewModel.isSignUpEnable ? @drawable/bg_round_primary : @drawable/bg_round_grey}"
+                android:text="@string/sign_up"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/content"
+                app:layout_constraintLeft_toLeftOf="@id/et_id"
+                app:layout_constraintRight_toRightOf="@id/et_id"
+                android:clickable="@{viewModel.isSignUpEnable}"
+                android:onClick="@{() -> viewModel.signUp()}"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
